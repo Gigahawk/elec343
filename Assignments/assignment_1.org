@@ -67,7 +67,7 @@ In Example 1A, $X_L > X_C$ and yet $\tilde{I}$ was given as leading $\tilde{V}$.
 *** Solution
 The relationship between voltage and current is given by
 \[
-\tilde{V} = Z\tilde{I} + + \tilde{E}
+\tilde{V} = Z\tilde{I} + \tilde{E}
 \]
 
 Depending on the phase and magnitude of $\tilde{E}$, $\tilde{I}$ can both lead or lag regardless of the phase of $Z$ relative to $\tilde{V}$.
