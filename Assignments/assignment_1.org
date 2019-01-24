@@ -188,10 +188,10 @@ $V_1 = 2\cos{400t}$.
 ($b$) Express $I_1$.
 *** Solution
 \begin{align*}
-\omega_e &= 400
-X_{m1} &= \omega_e L
-&= (400) (1)
-&= 400 \Omega
+\omega_e &= 400 \\
+X_{m1} &= \omega_e L\\
+&= (400) (1) \\
+&= 400 \Omega \\
 \end{align*}
 
 **** ($a$)
@@ -203,11 +203,13 @@ Assume voltage is along the real axis.
 \tilde{I}_1 &= \frac{\tilde{V}_1}{Z} \\
 &= \frac{\tilde{V}_1}{(r_1 + r_2 + R_L) + j\omega_e(L_{l1} + L_{l2})} \\
 &= \frac{\sqrt{2} \phase{\ang{0}} \text{V}}{((1\Omega) + (1\Omega) + (2\Omega)) + j(400)((0.01 \text{H}) + (0.01 \text{H}))} \\
-&= 0.158 \phase{\ang{-63.4}} \text{A}
+&= \frac{\sqrt{2} \phase{\ang{0}} \text{V}}{(4 + j8)\Omega} \\
+&= \frac{\sqrt{2} \phase{\ang{0}} \text{V}}{8.944 \phase{\ang{63.43}}\Omega} \\
+&= 0.158 \phase{\ang{-63.43}} \text{A}
 \end{align*}
 **** ($b$)
 \[
-I_1 = \sqrt{2} \cdot (0.158 \text{A}) \cos{(400t - \ang{63.4})}
+I_1 = \sqrt{2} \cdot (0.158 \text{A}) \cos{(400t - \ang{63.43})}
 \]
 ** Problem 15
 For the elementary electromagnet shown in Fig. 1.7-1, assume that the cross-sectional area of the stationary and movable member is the same and $A_i = A_g = 4 \text{cm}^2$.
@@ -218,13 +220,12 @@ $\mu_{ri} = 1000$.
 Express $L_m(x)$ given by (1.7-17) and the approximation for $x > 0$ given by (1.7-21).
 Determine the minimum value of $x$ when this approximate expression for $L_m(x)$ is less than 1.1 the value given by (1.7-17)
 *** Solution
-\[
-L_m(x) = \frac{k}{k_0 + x}
-\]
 
 \begin{align*}
+L_m(x) &= \frac{k}{k_0 + x} \\
+\\
 k &= \frac{N^2 \mu_0 A_i}{2} \\
-k &= \frac{(500)^2(4 \cdot 10^{-4})(4\pi \cdot 10^{-7})}{2}
+k &= \frac{(500)^2(4 \cdot 10^{-4})(4\pi \cdot 10^{-7})}{2}\\
 &= 2\pi \cdot 10^{-5}\\
 \\
 k_0 &= \frac{l_i}{2\mu_{ri}} \\
