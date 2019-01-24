@@ -1,0 +1,279 @@
+#+TITLE: ELEC 343 Assignment 1
+#+AUTHOR: Jasper Chan - 37467164
+
+#+OPTIONS: num:3
+
+#+LATEX_HEADER: \setlength{\parindent}{0pt}
+#+LATEX_HEADER: \setlength{\parindent}{0pt}
+#+LATEX_HEADER: \usepackage{steinmetz}
+#+LATEX_HEADER: \usepackage{siunitx}
+* Example 1A
+** SP1.2-1
+If $\tilde{V} = 1\phase{\ang{0}}$ and $\tilde{I} = 1\phase{\ang{180}}$ in the direction of the voltage drop, calculate $Z$ and $P_{ave}$.
+Is power generated or consumed?
+*** Solution
+We can find $Z$ using $\tilde{V} = Z\tilde{I}$
+\begin{align*}
+\tilde{V} &= Z\tilde{I} \\
+Z &= \frac{\tilde{V}}{\tilde{I}} \\
+&= \frac{(1 \phase{\ang{0}})}{(1\phase{\ang{180}})} \\
+&= (1 \phase{\ang{-180}}) \Omega = (-1 + j0) \Omega
+\end{align*}
+
+Next, we can find $P_{avg}$ using the formulas
+\[
+P_{avg} = \frac{1}{2}|\tilde{V}||\tilde{I}|\cos{\phi}
+\]
+\[
+\phi = \arg{\tilde{I}} - \arg{\tilde{V}}
+\]
+
+\begin{align*}
+P_{avg} &= \frac{1}{2}|(1 \cdot \sqrt{2}) \text{V}||(1 \cdot \sqrt{2}) \text{A}| \cos{(\ang{180} - \ang{0})}\\
+&= -1 \text{W}
+\end{align*}
+
+Since $P_{avg}$ is negative, there is 1W of power generated.
+
+
+** SP1.2-2
+For SP1.2-1, express instantaneous voltage, current, and power if the frequency is 60 Hz.
+*** Solution
+Voltage:
+\begin{align*}
+V &= (1 \text{V}) \cdot \sqrt{2} \cos{\left((2\pi)(60\text{Hz})t\right)} \\
+&= \sqrt{2} \cos{(377t)}
+\end{align*}
+
+Current:
+\begin{align*}
+I &= (1 \text{A}) \cdot \sqrt{2} \cos{\left((2\pi)(60\text{Hz})t + \pi\right)} \\
+&= \sqrt{2} \cos{(377t + \pi)} 
+\end{align*}
+
+Power:
+\begin{align*}
+P &= IV \\
+&= \sqrt{2}\cos{(377t)} \cdot \sqrt{2}\cos{(377t + \pi)} \\
+&= 2\left(\cos{(377t)}\cos{(377t + \pi)}\right) \\
+&= 2\left(\frac{1}{2}\left(\cos{\left(377t - \left(377t + pi\right)\right)} + \cos{\left(377t + \pi + (377t)\right)}\right)\right) \\
+&= \cos{(-pi)} + \cos{\left(754t + \pi\right)} \\
+&= -1 + \cos{\left(754t + \pi\right)} \\
+\end{align*}
+
+** SP1.2-4
+In Example 1A, $X_L > X_C$ and yet $\tilde{I}$ was given as leading $\tilde{V}$. How can this be?
+
+*** Solution
+The relationship between voltage and current is given by
+\[
+\tilde{V} = Z\tilde{I} + + \tilde{E}
+\]
+
+Depending on the phase and magnitude of $\tilde{E}$, $\tilde{I}$ can both lead or lag regardless of the phase of $Z$ relative to $\tilde{V}$.
+* Example 1B
+** SP1.3-1
+Calculate $\Phi_1$ in Example 1B
+*** Solution
+\begin{align*}
+Ni &= \Re_{ab}(\Phi_1 + \Phi_2) + \Re_{bcda}\Phi_1 \\
+\Phi_1 &= \frac{1}{\Re_{ab}}\left(Ni - \Re_{ab}(\Phi_1 + \Phi_2)\right) \\
+&= \frac{1}{(358099\text{H}^{-1})} \left( (100)(10\text{A}) - (109419\text{H}^{-1})(2.547 \cdot 10^{-3} \text{Wb})\right) \\
+&= 2.014 \cdot 10^{-3} \text{Wb}
+\end{align*}
+
+** SP1.3-3
+Remove the center leg of the magnetic system shown in Fig. 1C-1.
+Calculate the total flux when $I_1 = 9\text{A}$ and $I_2 = -15\text{A}$
+*** Solution
+Removing the middle leg causes all the circuit components to be connected in series, meaning the two sources can be added together
+
+\begin{align*}
+\sum\text{mmf} &= N_1I_1 + N_2I_2 \\
+&= (150)(9\text{A}) + (90)(-15\text{A}) \\
+&= 0
+\end{align*}
+* Example 1D
+** SP1.5-2
+Consider the transformer and parameters calculated in Example 1D.
+Winding 2 is short circuited and 12 V (DC) is applied to winding 1.
+Calculate the steady-state values of $i_1$ and $i_2$.
+Repeat with winding 2 open-circuited.
+*** Solution
+Voltage across inductors is related to $\frac{dV}{dt}$, and is therefore 0 during steady state operation.
+In this case, the resistance in the windings will dissipate all of the energy in both cases
+\begin{align*}
+i_1 &= \frac{V}{r_1} \\
+&= \frac{12 \text{V}}{6 \Omega} \\
+&= 2 \text{A} \\
+\\
+i_2 &= 0 \text{A}
+\end{align*}
+
+** SP1.5-3
+Calculate the no-load (winding 2 open-circuited) current for the transformer given in Example 1D if $V_1 = \sqrt{2} \cdot 10 \cos{100t}$.
+*** Solution
+$i_2 = 0$, therefore only relevant components are $r_1$, $L_{l1}$, and $L_{m1}$ connected in series.
+
+\begin{align*}
+Z &= r_1 + j\omega_e(L_{l1} + L_{m1}) \\
+&= (6 \Omega) + j(100)\left((13.5 \cdot 10^{-3} \text{H}) + (263.9 \cdot 10^{-3} \text{H})\right) \\
+&= (6 + j27.74) \Omega = (28.38 \phase{\ang{77.8}}) \Omega \\
+\\
+\tilde{i}_1 &= \frac{\tilde{V}_1}{Z} \\
+&= \frac{(10\phase{\ang{0}})\text{V}}{(28.38 \phase{\ang{77.8}})\Omega} \\
+&= 0.352\phase{\ang{-77.8}} \text{A}
+\end{align*}
+
+* Textbook Chapter 1 Problems
+** Problem 3
+An iron-core transformer has two windings as shown in Fig. 1.10-1.
+$N_1 = 50 \text{turns}$,
+$N_2 = 100 \text{turns}$, and
+$\mu_r = 4000$.
+Calculate $L_{12}$, $L_{m1}$, and $L_{m2}$
+*** Solution
+\begin{align*}
+\Re_m &= \frac{l}{\mu_{iron}A} \\
+&= \frac{4 \cdot (0.3\text{m} - 0.05\text{m})}{(4000)\left(4\pi \cdot 10^{-7} \frac{\text{H}}{\text{m}}\right)(0.05 \text{m})^2} \\
+&= 79577 \text{H}^{-1}\\
+\\
+L_{12} &= \frac{N_1 N_2}{\Re_m} \\
+&= \frac{(50)(100)}{79577 \text{H}^{-1}} \\
+&= 0.0628 \text{H}\\
+\\
+L_{m1} &= \frac{N_1^2}{\Re_m} \\
+&= \frac{(50)^2}{79577 \text{H}^{-1}} \\
+&= 0.0314 \text{H}\\
+\\
+L_{m2} &= \frac{N_2^2}{\Re_m} \\
+&= \frac{(100)^2}{79577 \text{H}^{-1}} \\
+&= 0.1257 \text{H}
+\end{align*}
+** Problem 8
+The parameters of a transformer are:
+$r_1 = r'_2 = 10 \Omega$,
+$L_{m1} = 300 \text{mH}$,
+$L_{l1} = L'_{l2} = 30 \text{mH}$.
+A $10\text{V}$ peak-to-peak $30 \text{Hz}$ sinusoidal voltage is applied to winding 1.
+Winding 2 is short-circuited.
+Assume $i_1 = -i'_2$.
+Calculate the phasor $\tilde{I}_1$, with $\tilde{V}_1$ at zero degrees.
+*** Solution
+Assume $\tilde{V}$ is along the real axis.
+
+\begin{align*}
+\tilde{V} &= \frac{(10 \text{V})}{2\sqrt{2}} \phase{\ang{0}} \text{V}\\
+&= 3.54 \phase{\ang{0}} \text{V}\\
+\\
+Z &= \sum r + j\omega_e \sum L \\
+&= r_1 + r'_2 + j\omega_e(L_{l1} + L'_{l2}) \\
+&= (10\Omega) + (10\Omega) + j(2\pi)(30 \text{Hz})((30 \cdot 10^{-3}\text{H}) + (30 \cdot 10^{-3}\text{H}))\\
+&=20 + j11.31 \Omega = 22.98 \phase{\ang{29.45}} \Omega \\
+\\
+\tilde{I} &= \frac{\tilde{V}_1}{Z} \\
+&= \frac{3.54 \phase{\ang{0}} \text{V}}{22.98 \phase{\ang{29.45}} \Omega} \\
+&= 0.154 \phase{\ang{29.45}} \text{A}
+\end{align*}
+
+** Problem 9
+A transformer with two windings has the following parameters:
+$r_1 = r_2 = 1 \Omega$,
+$L_{m1} = 1 \text{H}$,
+$L_{l1} = L_{l2} = 0.01 \text{H}$,
+$N_1 = N_2$.
+A $2\Omega$ load resistance $R_L$ is connected across winding 2.
+$V_1 = 2\cos{400t}$.
+($a$) Calculate $\tilde{I}_1$.
+($b$) Express $I_1$.
+*** Solution
+\begin{align*}
+\omega_e &= 400
+X_{m1} &= \omega_e L
+&= (400) (1)
+&= 400 \Omega
+\end{align*}
+
+**** ($a$)
+Assume voltage is along the real axis.
+\begin{align*}
+\tilde{V}_1 &= \frac{2}{\sqrt{2}} \phase{\ang{0}} \text{V}\\
+&= \sqrt{2} \phase{\ang{0}} \text{V} \\
+\\
+\tilde{I}_1 &= \frac{\tilde{V}_1}{Z} \\
+&= \frac{\tilde{V}_1}{(r_1 + r_2 + R_L) + j\omega_e(L_{l1} + L_{l2})} \\
+&= \frac{\sqrt{2} \phase{\ang{0}} \text{V}}{((1\Omega) + (1\Omega) + (2\Omega)) + j(400)((0.01 \text{H}) + (0.01 \text{H}))} \\
+&= 0.158 \phase{\ang{-63.4}} \text{A}
+\end{align*}
+**** ($b$)
+\[
+I_1 = \sqrt{2} \cdot (0.158 \text{A}) \cos{(400t - \ang{63.4})}
+\]
+** Problem 15
+For the elementary electromagnet shown in Fig. 1.7-1, assume that the cross-sectional area of the stationary and movable member is the same and $A_i = A_g = 4 \text{cm}^2$.
+Assume
+$l_i = 20 \text{cm}$,
+$N = 500$, and 
+$\mu_{ri} = 1000$.
+Express $L_m(x)$ given by (1.7-17) and the approximation for $x > 0$ given by (1.7-21).
+Determine the minimum value of $x$ when this approximate expression for $L_m(x)$ is less than 1.1 the value given by (1.7-17)
+*** Solution
+\[
+L_m(x) = \frac{k}{k_0 + x}
+\]
+
+\begin{align*}
+k &= \frac{N^2 \mu_0 A_i}{2} \\
+k &= \frac{(500)^2(4 \cdot 10^{-4})(4\pi \cdot 10^{-7})}{2}
+&= 2\pi \cdot 10^{-5}\\
+\\
+k_0 &= \frac{l_i}{2\mu_{ri}} \\
+&= \frac{(0.2)}{2(1000)} \\
+&= 10^{-4}
+\end{align*}
+
+For $x > 0$, $L_m(x)$ can be approximated as:
+\[
+L_m(x) = \frac{k}{x}
+\]
+
+Solving for the minimum $x$:
+
+\begin{align*}
+\frac{k}{x} &= 1.1 \frac{k}{k_0 + x} \\
+(k_0 + x)k &= 1.1 kx \\
+k \cdot k_x + kx &= 1.1kx \\
+0.1kx &= k \cdot k_x \\
+x &= \frac{k_x}{0.1} \\
+&= \frac{(10^{-4})}{0.1} \\ 
+&= 0.001 \text{m}
+\end{align*}
+
+** Problem 16
+Express the voltage $v$ of the elementary electromagnet given by (1.7-16) for $L_m(x)$ given by (1.7-17), $i=\sqrt{2} \cdot I_s \cos{(\omega_e t)}$ and $x=t$.
+Approximate $v$ when $t$ is large.
+*** Solution
+\begin{align*}
+v &= ri + \left(L_1 + L_m(x)\right)\frac{di}{dt} + i\frac{dL_m(x)}{dx}\frac{dx}{dt} \\
+\\
+L_m(x) &= \frac{k}{k_0 + x} \\
+\\
+\frac{dL_m(x)}{dx} &= \frac{-k}{(k_0 + x)^2} \\
+\\
+\frac{di}{dt} &= \frac{d}{dt}\left(\sqrt{2} \cdot I_s \cos(\omega_e t)\right) \\
+&= -\sqrt{2}\cdot\omega_eI_s\sin{(\omega_et)}\\
+\end{align*}
+
+\begin{align*}
+\lim_{x\to\infty}L_m(x) &= 0\\
+\\
+\lim_{x\to\infty}\frac{dL_m(x)}{dx} &= 0\\
+\\
+\lim_{x\to\infty}v &= ri + (L_1 + 0)\frac{di}{dt} + i(0)\frac{dx}{dt} \\
+&= ri + L_1 \frac{di}{dt} \\
+&= r\left(\sqrt{2} \cdot I_s \cos{(\omega_et)}\right) - L_1\left(\sqrt{2} \cdot \omega_e I_s \sin{(\omega_et)}\right)
+\end{align*}
+
+
+
+
