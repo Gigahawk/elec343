@@ -196,6 +196,7 @@ X_{m1} &= \omega_e L\\
 
 **** ($a$)
 Assume voltage is along the real axis.
+Since $L_{m1} \ggg L_{l1}$, there will basically be no current flowing through it and the rest of the circuit can be considered to be entirely series.
 \begin{align*}
 \tilde{V}_1 &= \frac{2}{\sqrt{2}} \phase{\ang{0}} \text{V}\\
 &= \sqrt{2} \phase{\ang{0}} \text{V} \\
