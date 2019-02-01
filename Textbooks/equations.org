@@ -1,0 +1,106 @@
+
+#+LATEX_HEADER: \usepackage{steinmetz}
+#+LATEX_HEADER: \usepackage{siunitx}
+#+LATEX_HEADER: \usepackage{tocloft}
+#+LATEX_HEADER: \usepackage{amsmath}
+
+#+LATEX_HEADER: \setlength{\parindent}{0pt}
+
+#+LATEX_HEADER: \numberwithin{equation}{subsection}
+#+LATEX_HEADER: \renewcommand{\theequation}{\thesubsection-\arabic{equation}}
+
+#+LATEX_HEADER: \input{equations_header}
+
+\listofmyequations
+
+\setcounter{section}{1}
+* Electromechanical Energy Conversion
+\setcounter{subsection}{1}
+** Energy Balance Relationships
+\setcounter{equation}{0}
+\begin{align} 
+W_E &= W_e + W_{eL} + W_{eS} \\
+W_M &= W_m + W_{mL} + W_{mS} 
+\end{align}
+\myequations{Energy distribution within an electromechanical system}{51}
+
+Where:
+\begin{align*}
+W_{E} &\equiv \text{Energy supplied by electrical source} \\
+W_{eS} &\equiv \text{Energy stored in electric or magnetic fields} \\
+W_{eL} &\equiv \text{Heat loss of the electric system excluding coupling field losses} \\
+W_{e} &\equiv \text{Energy transfered to the coupling field by the electrical system} \\
+W_{M} &\equiv \text{Energy supplied by mechanical source} \\
+W_{mS} &\equiv \text{Energy stored in moving member and compliances of mechanical system} \\
+W_{mL} &\equiv \text{Energy loss of the mechanical system due to heat/friction} \\
+W_{m} &\equiv \text{Energy transferred to the coupling field by the mechanical system} \\
+\end{align*}
+
+Energy transferred to the coupling field is considered positive.
+
+\setcounter{equation}{2}
+\begin{equation}
+W_F = W_f + W_{fL}
+\end{equation}
+\myequations{Energy stored in coupling field}{51}
+
+Where:
+\begin{align*}
+W_{F} &\equiv \text{Energy transferred to the coupling field} \\
+W_{f} &\equiv \text{Energy stored in coupling field} \\
+W_{fL} &\equiv \text{Energy dissipated due to heat (eddy current, hysteresis, dielectric losses)} \\
+\end{align*}
+
+\setcounter{equation}{4}
+\begin{equation}
+W_f + W_{fL} = W_e + W_m
+\end{equation}
+\myequations{Energy balance for an electromechanical system}{51}
+
+\setcounter{equation}{6}
+\begin{equation}
+v = ri + l\frac{di}{dt} + e_f
+\end{equation}
+\myequations{Voltage equation for electric side of electromechanical system}{52}
+
+Where:
+\begin{align*}
+v &\equiv \text{Voltage source} \\
+r &\equiv \text{Resistance in wire} \\
+i &\equiv \text{Current through system} \\
+l &\equiv \text{Inductance of loss inductor} \\
+e_f &\equiv \text{Voltage drop across magnetizing inductor} \\
+\end{align*}
+
+\setcounter{equation}{7}
+\begin{equation}
+f = M\frac{d^2x}{dt^2} + D\frac{dx}{dt}  + K(x - x_0) - f_e
+\end{equation}
+\myequations{Dynamic equation for mechanical side of electromechanical system}{54}
+
+Where:
+\begin{align*}
+f &\equiv \text{Extrenally applied mechanical force} \\
+f_e &\equiv \text{Electromagnetic or electrostatic force on member} \\
+M &\equiv \text{Mass of movable member} \\
+D &\equiv \text{Damping coefficient} \\
+K &\equiv \text{Spring constant} \\
+x_0 &\equiv \text{Steady state position when $f_e$ and $f$ equal zero} \\
+\end{align*}
+\setcounter{subsection}{2}
+** Energy in Coupling Field
+\setcounter{equation}{7}
+\begin{align} 
+W_f(i,x) &= \int{i \frac{\partial\lambda(i,x)}{\partial i}di} \nonumber \\
+&= \int_0^i \xi \frac{\partial\lambda(\xi,x)}{\partial \xi}d\xi \\
+W_c(i,x) &= \int{\lambda(i,x)di} \nonumber \\
+&= \int_0^i \lambda(\xi, x)d\xi
+\end{align}
+\myequations{Expression for energy and coenergy of coupling field}{59}
+
+Where:
+\begin{align*}
+\xi &\equiv \text{Dummy variable} \\
+W_{f} &\equiv \text{Energy stored in coupling field} \\
+W_{c} &\equiv \text{Coenergy of coupling field} \\
+\end{align*}
