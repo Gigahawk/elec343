@@ -107,7 +107,7 @@ $\Delta W_f = \text{02A0} - \text{01A0} = \text{0210}$
 **** (b)
 $\Delta W_c = \text{0C20} - \text{0B10}$
 **** (c)
-$\Delta W_e = 0$ (Flux linkage stays the same)
+$\Delta W_e = 0$ ($\lambda$ stays the same)
 **** (d)
 $\Delta W_m = \Delta W_f - \Delta W_e = \Delta W_f = \text{0210}$ 
 ** Problem 13
@@ -118,10 +118,13 @@ Calculate $W_{eS}$, $W_f$, and $W_{mS}$ during steady-state operation.
 **** $W_{eS}$
 Since $l$ is assumed to be zero, there can be no energy stored in the electromagnetic portion of the system ($W_{eS} = 0$)
 **** $W_f$
+For a linear system:
 $$W_f = \frac{1}{2}L(x)i^2$$
 
 From textbook equation (2.6-1), the inductance of the electromagnet can be approximated as
-$$L(x) = L_l + L_m(x) = L_l + \frac{k}{x}$$
+\begin{equation*}
+L(x) = L_l + L_m(x) = L_l + \frac{k}{x} \tag{2.6-1}
+\end{equation*}
 for $x > 0$.
 
 Since we're assuming that there is no inductive loss
@@ -151,7 +154,6 @@ W_{mS} &= K \left[\left(\frac{1}{2}(x)^2 - x_0(x)\right) - \left(\frac{1}{2}(x_0
 &= 0.333 \text{mJ}
 \end{align*}
 
-
 ** Problem 14
 Consider Fig. 2.6-3 wherein the force $f$ is changed.
 The source voltage $v$ is constant and the leakage $L_l$ and the external inductance $l$ are both zero.
@@ -167,7 +169,11 @@ P_{eL} &= ri^2 \\
 W_{eL} &= \int ri^2 dt
 \end{align*}
 The voltage formula for an electromechanical system can be found in the textbook at (2.2-7)
-$$v = ri + l\frac{di}{dt} + e_f$$
+
+\begin{equation*}
+v = ri + l\frac{di}{dt} + e_f \tag{2.2-7}
+\end{equation*}
+
 Rearranging and substituting $l = 0$ gives
 \begin{align*}
 i &= \frac{v-e_f}{r} \\
@@ -192,7 +198,9 @@ W_E &= \int v\left(\frac{v-e_f}{r}\right) dt \\
 
 **** $W_e$
 From textbook equation (2.2-1)
-$$W_E = W_e + W_{eL} + W_{eS}$$
+\begin{equation*}
+W_E = W_e + W_{eL} + W_{eS} \tag{2.2-1}
+\end{equation*}
 
 Since there are no leakage inductances we can neglect $W_{eS}$
 \begin{align*}
@@ -225,12 +233,15 @@ The formula for energy stored in the coupling field of a system with 2 electrica
 # This is pretty obvious now but it took forever to understand and hopefully future me will
 # thank me for writing this comment
 
-$$W_f = \frac{1}{2}L_{11}i_1^2 + L_{12}i_1i_2 + \frac{1}{2}L_{22}i_2^2$$
+\begin{equation*}
+W_f = \frac{1}{2}L_{11}i_1^2 + L_{12}i_1i_2 + \frac{1}{2}L_{22}i_2^2 \tag{2.3-29}
+\end{equation*}
 
 If we assume that the system is magnetically linear then $W_f = W_c$ and we can use the second formula found in Table (2.5-1)
 
 \begin{align*}
-T_e(\mathbf{i}, \theta) &= \frac{\partial W_c(\mathbf{i}, \theta)}{\partial \theta} \\
+T_e(\mathbf{i}, \theta) &= \frac{\partial W_c(\mathbf{i}, \theta)}{\partial \theta}
+= \frac{\partial W_f(\mathbf{i}, \theta)}{\partial \theta}\\
 &= \frac{1}{2} \frac{\partial L_{aa}}{\partial \theta} i_a^2 
  + \frac{\partial L_{ab}}{\partial \theta} i_ai_b 
  + \frac{1}{2} \frac{\partial L_{ab}}{\partial \theta} i_b^2 \\
@@ -331,7 +342,7 @@ Here the answer is similar to question 18 (b).
 T_e(\mathbf{i}, \theta) &= \frac{\partial W_c(\mathbf{i}, \theta)}{\partial \theta} \\
 &= \frac{\partial L_{12}}{\partial \theta} i_1i_2 \\
 &= L_{sr} \frac{\partial}{\partial \theta} \left[\sin{(\theta_r)}\right] i_1i_2 \\
-&= L_{sr} \cos{\theta_r} i_1i_2 \\
+&= L_{sr} \cos{(\theta_r)} i_1i_2 \\
 \end{align*}
 
 
