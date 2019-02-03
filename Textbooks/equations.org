@@ -13,6 +13,23 @@
 
 \listofmyequations
 
+\setcounter{section}{0}
+* Magnetic and Magnetically Coupled Circuits
+\setcounter{subsection}{6}
+** Magnetic Systems with Mechanical Motion
+\setcounter{equation}{25}
+\begin{equation}
+L_m(\theta_r) = L_A - L_B\cos{2\theta_r}
+\end{equation}
+\myequations{Inductance in an elementary reluctance machine (elementary motor)}
+
+Where:
+\begin{align*}
+L_{m} &\equiv \text{Magnetizing inductance} \\
+L_{A} &\equiv \text{Average inductance} \\
+L_{B} &\equiv \text{Amplitude of inductance} \\
+\end{align*}
+
 \setcounter{section}{1}
 * Electromechanical Energy Conversion
 \setcounter{subsection}{1}
