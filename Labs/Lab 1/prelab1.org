@@ -1,0 +1,103 @@
+#+TITLE: Pre-Lab 1: Linear Solenoid Actuator
+#+AUTHOR: Jasper Chan - 37467164
+#+OPTIONS: toc:nil num:nil
+
+#+LATEX_HEADER: \setlength{\parindent}{0pt}
+
+* Equation 1
+The voltage equation of a solenoid can be described as
+
+\begin{equation}
+v = ri + \frac{d\lambda}{dt}
+\end{equation}
+
+where flux linkages are expressed as
+
+\begin{equation}
+\lambda = N\Phi
+\end{equation}
+
+The total flux in the system can be written as
+
+\begin{equation}
+\Phi = \Phi_l + \Phi_m
+\end{equation}
+
+where $\Phi_l$ is the leakage flux and $\Phi_m$ is the magnetizing flux going through the solenoid casing and plunger.
+Assuming we operate the solenoid within it's linear region, we can express the fluxes in terms of reluctances.
+
+\begin{align}
+\Phi_l &= \frac{Ni}{\Re_l} & \Phi_m &= \frac{Ni}{\Re_m}
+\end{align}
+
+The flux linkages can now be rewritten as
+
+\begin{align}
+\lambda &= \left(L_l + L_m\right) \\
+&= \left(\frac{N^2}{\Re_l} + \frac{N^2}{\Re_m}\right)i
+\end{align}
+
+Where $L_l$ and $L_m$ are the leakage and magnetizing inductances respectively.
+
+The reluctance of the magnetizing path is
+
+\begin{equation}
+\Re_m = \Re_i + \Re_{gc} + \Re_{gx}
+\end{equation}
+
+where $\Re_i$ is the total reluctance of the solenoid casing and plunger, $\Re_{gc}$ is the reluctance of the constant width gap at the front of the solenoid, and $\Re_{gx}$ is the reluctance of the moving gap at the back of the solenoid.
+These reluctances can be expressed as
+
+\begin{align}
+\Re_i &= \frac{l_i}{\mu_{ri}\mu_0A_i} & \Re_{gc} &= \frac{c}{\mu_0A_g} & \Re_{gx} &= \frac{x}{\mu_0A_g}
+\end{align}
+
+where c is the width of the constant width gap.
+To simplify this further, we can assume that $A_g = A_i$, meaning $\Re_m$ can be rewritten as
+
+\begin{equation}
+\Re_m = \frac{1}{\mu_0A_i}\left(\frac{l_i}{\mu_{ri}} + c + x\right)
+\end{equation}
+
+The magnetizing inductance can now be written as
+
+\begin{equation}
+L_m = \frac{N^2}{\left(\frac{1}{\mu_0A_i}\right)\left(\frac{l_i}{\mu_{ri}} + c + x\right)}
+\end{equation}
+
+Rearranging this equation gives
+
+\begin{align}
+L_m &= \frac{N^2\mu_0A_i}{\left(\frac{l_i}{\mu_{ri}} + c\right) + x} \\
+&= \frac{k_1}{k_2 + x}
+\end{align}
+
+The total inductance in the system can now be written as
+
+#+NAME: eqn:1
+\begin{equation}
+L = \frac{k_1}{k_2 + x} + L_0
+\end{equation}
+
+where $L_0 = L_l$ (i.e. the remaining inductance when the plunger is removed or $x\to\infty$)
+* Equation 2
+The energy stored in an inductor is
+
+\begin{equation}
+W = \frac{1}{2}LI^2
+\end{equation}
+
+Substituting $L$ for equation ([[eqn:1]]), we get
+
+\begin{equation}
+W = \frac{1}{2}\left(\frac{k_1}{k_2 + x} + L_0\right)I^2
+\end{equation}
+
+Taking the derivative of energy with respect to $x$ gives force:
+
+\begin{align}
+\frac{dW}{dx} = F &= \frac{1}{2}I^2\left(-\frac{k_1}{(k_2 + x)^2}\right) \\
+&= \frac{-k_1I^2}{2(k_2 + x)^2}
+\end{align}
+
+
