@@ -1,0 +1,205 @@
+#+TITLE: Pre-Lab 2: Linear Solenoid Actuator
+#+AUTHOR: Jasper Chan - 37467164
+#+OPTIONS: toc:nil
+
+#+LATEX_HEADER: \setlength{\parindent}{0pt}
+
+* Part 1
+** Blocked Rotor Test label:br_sec
+For the blocked rotor test, we prevent the rotor from spinning, setting $\omega_m = 0$.
+#+BEGIN_SRC ipython :results silent :exports none 
+%matplotlib inline
+%config InlineBackend.figure_format = 'svg'
+
+import SchemDraw as schem
+import SchemDraw.elements as e
+
+METER_A = {
+    'name': 'METER_A',
+    'base': e.SOURCE,
+    'labels': [{'label': 'A', 'pos': [.5, 0]}]
+}
+
+MOTOR = {
+    'name': 'MOTOR',
+    'paths': [
+              [
+               [0,0],[0,0],
+               e._gap,
+               [0.5,0.5], [0,0.5], [0, -0.5], [0.5,-0.5],
+               e._gap,
+               [1.5, 0.5], [2,0.5], [2, -0.5], [1.5,-0.5],
+               e._gap,
+               [2,0], [2,0]
+              ]
+             ],
+    'theta': 90.,
+    'shapes': [
+               {
+                   'shape': 'circle',
+                   'center': [1, 0],
+                   'radius': 0.7}
+              ]
+   }
+    
+d = schem.Drawing(unit=3)
+
+d.add(e.SOURCE_I, label='$V_{DC}$', d='up', reverse=True)
+d.add(METER_A, d='right')
+
+a = d.add(e.DOT)
+
+d.labelI(a, '$I_f$', arrowlen=d.unit*0.3)
+
+d.add(e.METER_V, d='down', label='$V_f$')
+d.add(e.LINE, d='left')
+
+rf = d.add(e.RES, label='$R_f$', xy=a.start, d='right')
+d.add(e.INDUCTOR2, label='$L_f$', d='down')
+d.add(e.LINE, d='left')
+
+d.add(e.RES, xy=[rf.end[0]+ d.unit*1.2, rf.end[1]], d='right', label='$R_a$')
+b = d.add(e.DOT)
+
+d.labelI(b, '$I_a$', arrowlen=-d.unit*0.3)
+
+d.add(e.METER_V, d='down', label='$V_t$')
+d.add(e.LINE, d='left')
+motor = d.add(MOTOR, label='$\omega_m = 0$')
+
+
+d.add(METER_A, xy=b.start, d='right')
+d.add(e.SOURCE_I, label='$V_{DC}$', d='down')
+d.add(e.LINE, d='left')
+
+d.draw()
+d.save('br_diagram.svg')
+
+#+END_SRC 
+
+#+ATTR_LATEX: :width \linewidth :placement [H]
+#+CAPTION: Equivalent circuit diagram for a DC motor label:br_test
+[[./br_diagram.svg]]
+From Figure ref:br_test, we can see that:
+\begin{align*}
+R_f &= \frac{V_f}{I_f} & R_a &= \frac{V_t}{I_a}
+\end{align*}
+Where:
+\begin{align*}
+R_f &\equiv \text{The resistance of the field windings} \\
+R_a &\equiv \text{The resistance of the armature and brushes}
+\end{align*}
+** No Load Test
+For the no load test, we let the motor spin freely without anything attached to it to measure the friction.
+#+BEGIN_SRC ipython :results silent :exports none 
+d = schem.Drawing(unit=3)
+
+
+d.add(e.RES,  d='right', label='$R_a$')
+b = d.add(e.DOT)
+
+d.labelI(b, '$I_a$', arrowlen=-d.unit*0.3)
+
+d.add(e.METER_V, d='down', label='$V_t$')
+d.add(e.LINE, d='left')
+motor = d.add(MOTOR, label='$\omega_m$', botlabel=['−', '$E_a$', '+'])
+
+
+d.add(METER_A, xy=b.start, d='right')
+d.add(e.SOURCE_I, label='$V_{DC}$', d='down')
+d.add(e.LINE, d='left')
+
+d.draw()
+d.save('nl_diagram.svg')
+
+#+END_SRC
+#+ATTR_LATEX: :width 0.5\linewidth :placement [H]
+#+CAPTION: Armature side of equivalent circuit diagram for a DC motor label:nl_test
+[[./nl_diagram.svg]]
+By measuring $\omega_m$ and using values measured in part ref:br_sec we can find:
+\begin{align*}
+T_e &= k_a \Phi_p I_a = k_t I_a & V_t &= R_a I_a + E_a \\
+E_a &= k_a \Phi_p \omega_m = k_v \omega_m & P_e &= I_a E_a = \omega_m T_e \\
+k_t &= k_v = \frac{V_a - R_a I_a}{\omega_r} & T_e &= T_\text{fric}(\omega_m)
+\end{align*}
+** Stopping transient to determine inertia
+$$J = \frac{T_\text{fric}(\omega_m) \cdot k_v \Delta t}{\Delta E_a} $$
+#+BEGIN_SRC ipython :results silent :exports none 
+d = schem.Drawing(unit=3)
+
+d.add(e.RES,  d='right', label='$R_a$')
+b = d.add(e.DOT)
+
+d.labelI(b, '$I_a$', arrowlen=-d.unit*0.3)
+
+d.add(e.METER_V, d='down', label='$V_t$')
+d.add(e.LINE, d='left')
+motor = d.add(MOTOR, label='$\omega_m$', botlabel=['−', '$E_a$', '+'])
+
+
+d.add(METER_A, xy=b.start, d='right')
+d.add(e.SWITCH_SPST, d='right')
+d.add(e.SOURCE_I, label='$V_{DC}$', d='down')
+d.add(e.LINE, d='left', l=2*d.unit)
+
+d.draw()
+d.save('st_diagram.svg')
+
+#+END_SRC
+#+ATTR_LATEX: :width 0.7\linewidth :placement [H]
+#+CAPTION: Armature side of equivalent circuit diagram for a DC motor with open switch for stopping transient test label:st_test
+[[./st_diagram.svg]]
+\begin{align*}
+E_a &= V_t - R_a I_a & \text{(when switched closed)} \\
+E_a &= k_v \omega \\
+T_\text{fric}(\omega_m) &= -J\frac{\Delta E_a}{k \Delta t}
+\end{align*}
+
+
+
+** Generator test
+#+BEGIN_SRC ipython :results silent :exports none 
+    
+d = schem.Drawing(unit=3)
+
+d.add(e.SOURCE_I, label='$V_{DC}$', d='up', reverse=True)
+d.add(METER_A, d='right')
+
+a = d.add(e.DOT)
+
+d.labelI(a, '$I_f$', arrowlen=d.unit*0.3)
+
+d.add(e.METER_V, d='down', label='$V_f$')
+d.add(e.LINE, d='left')
+
+rf = d.add(e.RES, label='$R_f$', xy=a.start, d='right')
+d.add(e.INDUCTOR2, label='$L_f$', d='down')
+d.add(e.LINE, d='left')
+
+d.add(e.RES, xy=[rf.end[0]+ d.unit*1.2, rf.end[1]], d='right', label='$R_a$')
+
+d.add(e.METER_V, d='down', botlabel='$V_t=E_a$')
+d.add(e.LINE, d='left')
+motor = d.add(MOTOR, label='$\omega_m$')
+
+d.draw()
+d.save('gen_diagram.svg')
+
+#+END_SRC 
+#+ATTR_LATEX: :width 0.9\linewidth :placement [H]
+#+CAPTION: Equivalent circuit diagram for a DC motor running as a generator label:gen_test
+[[./gen_diagram.svg]]
+When not passing current into the armature side:
+\begin{align*}
+V_t &= E_a \\
+E_a &= L_{af} I_f \omega_m = k_v \omega_m
+\end{align*}
+
+* Part 2
+\begin{align*}
+v_a &= R_a i_a + L_a \frac{di_a}{dt} + E_a & E_a &= k_t \omega_r \\
+&= R_a i_a + L_a \frac{\Delta I_a}{\Delta t} + E_a \\
+v_a - k_t \omega_r - R_a i_a &= L_a \frac{\Delta I_a}{\Delta t} \\ \\
+L &= \frac{\Delta t}{\Delta I_a} (v_a - k_t \omega_r - R_a i_a)
+\end{align*}
+
