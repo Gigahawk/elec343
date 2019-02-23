@@ -1,0 +1,195 @@
+#+TITLE: Pre-Lab 3: Permanent Magnet Stepper Motor
+#+AUTHOR: Jasper Chan - 37467164
+#+OPTIONS: toc:nil
+
+#+LATEX_HEADER: \setlength{\parindent}{0pt}
+
+#+BEGIN_SRC ipython :results silent :exports none
+%matplotlib inline
+%config InlineBackend.figure_format = 'svg'
+from matplotlib import pyplot as plt
+import matplotlib
+import numpy as np
+from tabulate import tabulate
+plt.rcParams['svg.fonttype'] = 'path'
+#+END_SRC
+* Part 1
+** Full Step
+#+BEGIN_SRC ipython :results drawer :exports results
+i_as = [1, 0, -1, 0, 1]
+i_bs = [0, 1, 0, -1, 0]
+
+t = np.arange(len(i_as))
+
+f, axarr = plt.subplots(2, sharex=True)
+f.suptitle('Full Step Stepping Sequence')
+plt.setp(axarr, xticks=[])
+
+axarr[0].set_ylabel('$i_{as}$')
+axarr[1].set_ylabel('$i_{bs}$')
+
+axarr[0].axhline(linewidth='1', color='k')
+axarr[1].axhline(linewidth='1', color='k')
+
+axarr[0].step(t, i_as,where='mid')
+axarr[1].step(t, i_bs,where='mid')
+
+f.savefig('full_step.svg')
+
+#+END_SRC 
+
+#+RESULTS:
+:RESULTS:
+# Out[3]:
+[[file:./obipy-resources/Vvs4mq.svg]]
+:END:
+** Half Step
+#+BEGIN_SRC ipython :results drawer :exports results
+i_as = [1, 1, 0, -1, -1, -1,  0,  1, 1]
+i_bs = [0, 1, 1,  1,  0, -1, -1, -1, 0]
+
+t = np.arange(len(i_as))
+
+f, axarr = plt.subplots(2, sharex=True)
+f.suptitle('Half Step Stepping Sequence')
+plt.setp(axarr, xticks=[])
+
+axarr[0].set_ylabel('$i_{as}$')
+axarr[1].set_ylabel('$i_{bs}$')
+
+axarr[0].axhline(linewidth='1', color='k')
+axarr[1].axhline(linewidth='1', color='k')
+
+axarr[0].step(t, i_as,where='mid')
+axarr[1].step(t, i_bs,where='mid')
+
+f.savefig('half_step.svg')
+
+#+END_SRC 
+
+#+RESULTS:
+:RESULTS:
+# Out[4]:
+[[file:./obipy-resources/uLwpRQ.svg]]
+:END:
+
+** Full Step With Both Windings Energized
+#+BEGIN_SRC ipython :results drawer :exports results
+i_as = [1, -1, -1,  1]
+i_bs = [1,  1, -1, -1]
+
+t = np.arange(len(i_as))
+
+f, axarr = plt.subplots(2, sharex=True)
+f.suptitle('Full Step (both energized) Stepping Sequence')
+plt.setp(axarr, xticks=[])
+
+axarr[0].set_ylabel('$i_{as}$')
+axarr[1].set_ylabel('$i_{bs}$')
+
+axarr[0].axhline(linewidth='1', color='k')
+axarr[1].axhline(linewidth='1', color='k')
+
+axarr[0].step(t, i_as,where='mid')
+axarr[1].step(t, i_bs,where='mid')
+
+f.savefig('full_step_both.svg')
+
+#+END_SRC 
+
+#+RESULTS:
+:RESULTS:
+# Out[5]:
+[[file:./obipy-resources/Gprusn.svg]]
+:END:
+
+* Part 2
+#+BEGIN_SRC ipython :results raw drawer :exports results
+
+theta = np.linspace(0, 2*np.pi, 40)
+
+v_as = np.around(np.cos(theta)*10, 2)
+v_bs = np.around(np.sin(theta)*10, 2)
+
+f, axarr = plt.subplots(2, sharex=True)
+f.suptitle('Microstepping Step Sequence')
+plt.setp(axarr, xticks=[])
+
+axarr[0].set_ylabel('$v_{as}$')
+axarr[1].set_ylabel('$v_{bs}$')
+
+axarr[0].axhline(linewidth='1', color='k')
+axarr[1].axhline(linewidth='1', color='k')
+
+axarr[0].step(theta, v_as,where='mid')
+axarr[1].step(theta, v_bs,where='mid')
+
+f.savefig('micro_step.svg')
+
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+# Out[73]:
+[[file:./obipy-resources/uIQXe4.svg]]
+:END:
+
+
+#+BEGIN_SRC ipython :results output raw drawer :exports results
+df = DataFrame({'$v_{as}$': v_as, '$v_{bs}$': v_bs})
+df.index.name = 'step'
+
+df.to_csv('microstep.csv', index=False, header=False)
+
+# ghetto hack cause ob-ipython doesn't like pandas
+print('#+ATTR_LATEX: :align r|r r')
+print(tabulate(df, headers='keys', tablefmt='orgtbl'))
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+#+ATTR_LATEX: :align r|r r
+|   step |   $v_{as}$ |   $v_{bs}$ |
+|--------+------------+------------|
+|      0 |      10    |       0    |
+|      1 |       9.87 |       1.6  |
+|      2 |       9.49 |       3.17 |
+|      3 |       8.85 |       4.65 |
+|      4 |       7.99 |       6.01 |
+|      5 |       6.93 |       7.21 |
+|      6 |       5.68 |       8.23 |
+|      7 |       4.29 |       9.03 |
+|      8 |       2.78 |       9.61 |
+|      9 |       1.21 |       9.93 |
+|     10 |      -0.4  |       9.99 |
+|     11 |      -2    |       9.8  |
+|     12 |      -3.55 |       9.35 |
+|     13 |      -5    |       8.66 |
+|     14 |      -6.32 |       7.75 |
+|     15 |      -7.49 |       6.63 |
+|     16 |      -8.45 |       5.34 |
+|     17 |      -9.2  |       3.92 |
+|     18 |      -9.71 |       2.39 |
+|     19 |      -9.97 |       0.8  |
+|     20 |      -9.97 |      -0.8  |
+|     21 |      -9.71 |      -2.39 |
+|     22 |      -9.2  |      -3.92 |
+|     23 |      -8.45 |      -5.34 |
+|     24 |      -7.49 |      -6.63 |
+|     25 |      -6.32 |      -7.75 |
+|     26 |      -5    |      -8.66 |
+|     27 |      -3.55 |      -9.35 |
+|     28 |      -2    |      -9.8  |
+|     29 |      -0.4  |      -9.99 |
+|     30 |       1.21 |      -9.93 |
+|     31 |       2.78 |      -9.61 |
+|     32 |       4.29 |      -9.03 |
+|     33 |       5.68 |      -8.23 |
+|     34 |       6.93 |      -7.21 |
+|     35 |       7.99 |      -6.01 |
+|     36 |       8.85 |      -4.65 |
+|     37 |       9.49 |      -3.17 |
+|     38 |       9.87 |      -1.6  |
+|     39 |      10    |      -0    |
+:END:
+
