@@ -228,6 +228,84 @@ Develop the time-domain block diagram for a series-connected dc machine.
 You will also need this for Part 2 of this Assignment.
 
 *** Solution
-
+#+ATTR_LATEX: :placement [H]
 #+CAPTION: Block diagram of a series DC motor.
 [[./ProblemB.svg]]
+* Series and PMDC Motor Analysis
+#+BEGIN_SRC ipython :results silent :exports none
+%matplotlib inline
+%config InlineBackend.figure_format = 'svg'
+from matplotlib import pyplot as plt
+import numpy as np
+from pandas import DataFrame
+import csv
+#+END_SRC
+** Transient study
+#+BEGIN_SRC ipython :results silent :exports none
+series_data = {
+    'time': [],
+    'I_a': [],
+    'omega_r': [],
+    'T_e': []
+}
+
+pm_data = {
+    'time': [],
+    'I_a': [],
+    'omega_r': [],
+    'T_e': []
+}
+
+with open('./series_data.csv', 'r') as csvfile:
+    plots = csv.reader(csvfile, delimiter=',')
+    next(plots, None) # Skip header
+    for row in plots:
+        series_data['time'].append(float(row[0]))
+        series_data['I_a'].append(float(row[1]))
+        series_data['omega_r'].append(float(row[2]))
+        series_data['T_e'].append(float(row[3]))
+        
+with open('./pm_data.csv', 'r') as csvfile:
+    plots = csv.reader(csvfile, delimiter=',')
+    next(plots, None) # Skip header
+    for row in plots:
+        pm_data['time'].append(float(row[0]))
+        pm_data['I_a'].append(float(row[1]))
+        pm_data['omega_r'].append(float(row[2]))
+        pm_data['T_e'].append(float(row[3]))
+
+#+END_SRC
+
+#+BEGIN_SRC ipython :results silent :exports none
+
+f, axarr = plt.subplots(3, sharex=True, figsize=(6, 8))
+
+for ax in axarr.flat:
+    ax.set(xlabel='t [s]')
+# Hide x labels and tick labels for top plots and y ticks for right plots.
+for ax in axarr.flat:
+    ax.label_outer()
+
+axarr[0].set_ylabel('$I_a$ [A]')
+axarr[1].set_ylabel('$\omega_r$ [rad/s]')
+axarr[2].set_ylabel('$T_e$ [$N \cdot m$]')
+
+axarr[0].plot(series_data['time'], series_data['I_a'], label='Series Motor')
+axarr[1].plot(series_data['time'], series_data['omega_r'])
+axarr[2].plot(series_data['time'], series_data['T_e'])
+
+axarr[0].plot(pm_data['time'], pm_data['I_a'], linestyle='dashed', label='PMDC Motor')
+axarr[1].plot(pm_data['time'], pm_data['omega_r'], linestyle='dashed')
+axarr[2].plot(pm_data['time'], pm_data['T_e'], linestyle='dashed')
+
+f.legend()
+f.tight_layout()
+
+f.savefig('transient.svg')
+
+#+END_SRC
+
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: DC Motor Transient Behavior
+[[./transient.svg]]
+
