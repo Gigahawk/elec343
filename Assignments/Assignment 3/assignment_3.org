@@ -8,6 +8,8 @@
 #+LATEX_HEADER: \usepackage{siunitx}
 #+LATEX_HEADER: \DeclareSIUnit\inch{in}
 #+LATEX_HEADER: \DeclareSIUnit\ounce{oz}
+#+LATEX_HEADER: \DeclareSIUnit\rpm{rpm}
+#+LATEX_HEADER: \DeclareSIUnit\hp{hp}
 #+LATEX_HEADER: \usepackage{tikz}
 \sisetup{inter-unit-product=\cdot}
 * Example 3B
@@ -78,3 +80,149 @@ V &= \frac{K \omega_r}{k_v} r_a + \omega_r k_v \\
 
 
 
+
+** Problem 2
+A permanent-magnet dc motor is driven by a mechanical source at \SI{3820}{\rpm}.
+The measured open-circuit armature voltage is \SI{7}{\volt}.
+The mechanical source is disconnected, and a \SI{12}{\volt} electric source is connected to the armature.
+With zero-load torque, $I_a = \SI{0.1}{\ampere}$ and $\omega_r = \SI{650}{\radian/\second}$. Calculate $k_v$, $B_m$, and $r_a$
+*** Solution
+First we find $\omega_r$
+\begin{align*}
+\omega_r &= n \cdot \frac{\pi}{30} \\
+&= (3820) \cdot \frac{\pi}{30} \\
+&= \SI{400.03}{\radian/\second}
+\end{align*}
+
+When the motor is measured open-circuit, $I_a = 0$.
+$$V_a = k_v \omega_{r_\text{driven}}$$
+
+Solving for $k_v$ yields:
+
+\begin{align*}
+k_v &= \frac{V_a}{\omega_{r_\text{driven}}} \\
+&= \frac{(\SI{7}{\volt})}{(\SI{400.03}{\radian/\second})} \\
+&= \SI{0.0175}{\volt\second/\radian}
+\end{align*}
+
+At steady-state no-load operation:
+$$T_e = B_m \omega_r = k_v I_a$$
+
+Solving for $B_m$ yields:
+\begin{align*}
+B_m &= \frac{k_v I_a}{\omega_r} \\
+&= \frac{(\SI{0.0175}{\volt\second/\radian})(\SI{0.1}{\ampere})}{(\SI{650}{\radian/\second})}
+&= \SI{2.692}{\micro\newton\meter\second}
+\end{align*}
+
+The voltage across $r_a$ is
+$$V_a - k_v \omega_r$$
+Dividing by steady-state current to find resistance:
+
+\begin{align*}
+r_a &= \frac{V_a - k_v \omega_r}{I_a} \\
+&= \frac{(\SI{12}{\volt}) - (\SI{0.0175}{\volt\second/\radian})(\SI{650}{\radian/\second})}{(\SI{0.1}{\ampere})} \\
+&= \SI{6.25}{\ohm}
+\end{align*}
+
+
+
+
+** Problem 7
+A dc machine is rated \SI{5}{\hp} with $V_f = \SI{240}{\volt}$, $V_a = \SI{240}{\volt}$, $r_a = \SI{0.63}{\ohm}$, and $L_{AF} = \SI{1.8}{\henry}$.
+At rated conditions $\omega_r = \SI{127.7}{\radian/\second}$ and the total resistance of the field circuit is \SI{240}{\ohm}. \\
+(a) Calculate the rated armature current.
+The machine is to be operated in the constant-power mode beyond rated speed. \\
+(b) Calculate I_f at four times rated speed. \\
+(c) Calculate the boundary value of T_e for (b)
+*** Solution
+**** (a)
+First let's calculate the rated field current $I_{fR}$
+\begin{align*}
+I_{fR} &= \frac{V_f}{r_f} \\
+&= \frac{(\SI{240}{\volt})}{(\SI{240}{\ohm})} \\
+&= \SI{1}{\ampere}
+\end{align*}
+
+Let's convert \SI{5}{\hp} to something more sensible.
+\begin{align*}
+P_{oR} &= (\SI{5}{\hp}) \cdot \frac{\SI{745.7}{\watt}}{\SI{1}{\hp}} \\
+&= \SI{3727.5}{\watt}
+\end{align*}
+
+Now we can solve for rated torque
+\begin{align*}
+T_{eR} &= \frac{P_{oR}}{\omega_{rR}} \\
+&= \frac{(\SI{3727.5}{\watt})}{(\SI{127.7}{\radian/\second})} \\
+&= \SI{29.19}{\newton\meter}
+\end{align*}
+
+With this we can find the rated armature current
+\begin{align*}
+I_{aR} &= \frac{T_{eR}}{L_{AF} I_{fR}} \\
+&= \frac{(\SI{29.19}{\newton\meter})}{(\SI{1.8}{\henry})(\SI{1}{\ampere})} \\
+&= \SI{16.22}{\ampere}
+\end{align*}
+**** (b)
+\begin{align*}
+I_f &= \frac{P_{oR}}{L_{AF} \omega_r I_{aR}} \\
+&= \frac{(\SI{3727.5}{\watt})}{(\SI{1.8}{\henry})\left(4\cdot(\SI{127.7}{\radian/\second})\right)(\SI{16.22}{\ampere})} \\
+&= \SI{0.250}{\ampere}
+\end{align*}
+**** (c)
+\begin{align*}
+T_e &= L_{AF} I_{aR} I_f \\
+&= (\SI{1.8}{\henry})(\SI{16.22}{\ampere})(\SI{0.250}{\ampere}) \\
+&= \SI{7.30}{\newton\meter}
+\end{align*}
+
+
+
+
+
+
+* Additional Problems
+** Problem A
+Consider a \SI{100}{\volt} series DC motor.
+The motor consumes \SI{100}{\watt} at full load while operating at speed of \SI{2000}{\rpm} when it is supplied from nominal voltage of \SI{100}{\volt}.
+
+The armature and field winding resistances are: $R_a = \SI{2}{\ohm}$ and $R_f = \SI{1}{\ohm}$, respectively.
+Calculate the stall torque (or the maximum starting torque) of this motor.
+*** Solution
+First we find the starting current in the motor.
+\begin{align*}
+I_a &= \frac{P_\text{in}}{V_a} \\
+&= \frac{\SI{100}{\watt}}{\SI{100}{\volt}} \\
+&= \SI{1}{\ampere}
+\end{align*}
+
+Let's also find $\omega_r$
+\begin{align*}
+\omega_r &= (2000)\frac{\pi}{30} \\
+&= \SI{209.44}{\radian/\second}
+\end{align*}
+
+Next we can rearrange the voltage equation to find the mutual inductance
+\begin{align*}
+V_a &= (R_a + R_f)I_a + \omega_r L_{AF} I_a \\
+L_{AF} &= \frac{V_a - (R_a + R_f)I_a}{\omega_r I_a} \\
+&= \frac{(\SI{100}{\volt}) - ((\SI{2}{\ohm}) + (\SI{1}{\ohm}))(\SI{1}{\ampere})}{(\SI{209.44}{\radian/\second})(\SI{1}{\ampere})}\\
+&= \SI{0.463}{\henry}
+\end{align*}
+
+For $\omega_r = 0$ (stalling), the current  can be found using:
+\begin{align*}
+I_a &= \frac{V_a}{R_a + R_f} \\
+&= \frac{(\SI{100}{\volt})}{(\SI{2}{\ohm}) + (\SI{1}{\ohm})} \\
+&= \SI{33.33}{\ampere}
+\end{align*}
+
+The stall torque can then be found by
+\begin{align*}
+T_e &= L_{AF} I_a^2 \\
+&= (\SI{0.463}{\henry})(\SI{33.33}{\ampere})^2 \\
+&= \SI{514.34}{\newton\meter}
+\end{align*}
+** Problem B
+Develop the time-domain block diagram for a series-connected dc machine.
+You will also need this for Part 2 of this Assignment.
