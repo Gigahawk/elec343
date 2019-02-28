@@ -1,0 +1,80 @@
+#+TITLE: ELEC 343 Assignment 2
+#+AUTHOR: Jasper Chan - 37467164
+
+#+OPTIONS: num:3
+
+#+LATEX_HEADER: \setlength{\parindent}{0pt}
+#+LATEX_HEADER: \usepackage{steinmetz}
+#+LATEX_HEADER: \usepackage{siunitx}
+#+LATEX_HEADER: \DeclareSIUnit\inch{in}
+#+LATEX_HEADER: \DeclareSIUnit\ounce{oz}
+#+LATEX_HEADER: \usepackage{tikz}
+\sisetup{inter-unit-product=\cdot}
+* Example 3B
+** SP3.4-1
+A 12-V, permanent-magnet dc motor has an armature resistance of $\SI{12}{\ohm}$ and $k_v = \SI{0.01}{\volt\cdot\second/\radian}$.
+Calculate the steady-state stall torque ($T_e$ with $\omega_r = 0$).
+*** Solution
+At stall, $E_a = 0$ and so all the current goes through the armature resistance.
+\begin{align*}
+I_a &= \frac{\SI{12}{\volt}}{\SI{12}{\ohm}} \\
+&= \SI{1}{\ampere}
+\end{align*}
+
+From this we can calculate $T_e$
+
+\begin{align*}
+T_e &= k_v \cdot I_a \\
+&= (\SI{0.01}{\volt\cdot\second/\radian}) \cdot (\SI{1}{\ampere}) \\
+&= \SI{0.01}{\newton\cdot\meter}
+\end{align*}
+** SP3.4-1
+Determine T_e in Example 3B.
+*** Solution
+From the textbook:
+\begin{align*}
+T_L &= \SI{3.53}{\milli\newton\meter} \\
+B_m &= \SI{6.04}{\micro\newton\metre\second} \\
+\omega_r &= \SI{249}{\radian/\second}
+\end{align*}
+
+From this we can calculate $T_e$
+\begin{align*}
+T_e &= B_m \omega_r + T_L \\
+&= (\SI{6.04}{\micro\newton\metre\second})(\SI{249}{\radian/\second}) + (\SI{3.53}{\milli\newton\meter}) \\
+&= \SI{5.053}{\milli\newton\meter} \\
+&= \SI{0.713}{\ounce\inch}
+\end{align*}
+** SP3.6-2
+What would happen to the rotor speed if, during field weakening, the field current accidentally become zero?
+Why?
+*** Solution
+From Figure (3.6-1) in the textbook:
+$$\omega_{r_{max}} = \frac{V_a}{k_v}$$
+
+Since $k_v$ is proportional to field current, if it went to zero $\omega_{r_{max}} \rightarrow \infty$ and the machine would continually speed up until it destroyed itself.
+* Textbook Chapter 3 Problems
+** Problem 1
+A permanent-magnet dc motor has the following parameters: $r_a = \SI{8}{\ohm}$ and $k_v = \SI{0.01}{\volt\second/\radian}$. 
+The shaft load torque is approximated as $T_L = K \omega_r$, where $K = \SI{5}{\micro\meter\second}$.
+The applied voltage is \SI{6}{\volt} and $B_m = 0$. Calculate the steady-state rotor speed $\omega_r$ in rad/s.
+*** Solution
+From the problem:
+
+\begin{align*}
+T_L &= k_t I_a \approx K \omega_r \\
+I_a &\approx \frac{K \omega_r }{k_t}
+\end{align*}
+
+Subbing into $V$ and solving for $\omega_r$:
+
+\begin{align*}
+V &= \frac{K \omega_r}{k_v} r_a + \omega_r k_v \\
+\omega_r &= \frac{V k_v}{K r_a + k_v^2} \\
+&= \frac{(\SI{6}{\volt})(\SI{0.01}{\volt\second/\radian})}{(\SI{5}{\micro\meter\second})(\SI{8}{\ohm}) + (\SI{0.01}{\volt\second/\radian})^2} \\
+&= \SI{428.6}{\radian/\second}
+\end{align*}
+
+
+
+
