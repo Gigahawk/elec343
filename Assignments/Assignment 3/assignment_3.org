@@ -14,7 +14,7 @@
 \sisetup{inter-unit-product=\cdot}
 * Example 3B
 ** SP3.4-1
-A 12-V, permanent-magnet dc motor has an armature resistance of $\SI{12}{\ohm}$ and $k_v = \SI{0.01}{\volt\cdot\second/\radian}$.
+A 12-V, permanent-magnet dc motor has an armature resistance of $\SI{12}{\ohm}$ and $k_v = \SI{0.01}{\volt\second/\radian}$.
 Calculate the steady-state stall torque ($T_e$ with $\omega_r = 0$).
 *** Solution
 At stall, $E_a = 0$ and so all the current goes through the armature resistance.
@@ -27,8 +27,8 @@ From this we can calculate $T_e$
 
 \begin{align*}
 T_e &= k_v \cdot I_a \\
-&= (\SI{0.01}{\volt\cdot\second/\radian}) \cdot (\SI{1}{\ampere}) \\
-&= \SI{0.01}{\newton\cdot\meter}
+&= (\SI{0.01}{\volt\second/\radian}) \cdot (\SI{1}{\ampere}) \\
+&= \SI{0.01}{\newton\meter}
 \end{align*}
 ** SP3.4-1
 Determine T_e in Example 3B.
@@ -226,3 +226,8 @@ T_e &= L_{AF} I_a^2 \\
 ** Problem B
 Develop the time-domain block diagram for a series-connected dc machine.
 You will also need this for Part 2 of this Assignment.
+
+*** Solution
+
+#+CAPTION: Block diagram of a series DC motor.
+[[./ProblemB.svg]]
