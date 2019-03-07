@@ -46,7 +46,7 @@ SL &= \frac{TP}{N} \\
 **** (c)
 Because of the arrangement of the teeth, the motor could spin in either direction.
 * Chapter 9.3 Study Problems
-** SP9.3-2
+** SP9.3-1
 The stator currents of a three-stack, variable-reluctance machine are $i_{as} = I$, $i_{bs} = -I$, and $i_{cs} = 0$.
 Determine the no-load rotor position.
 *** Solution
@@ -104,7 +104,7 @@ Initially $i_{as} = I$ and $i_{bs} = 0$.
 From this condition, the following sequence occurs: $i_{as} = 0$ and $i_{bs} = I$, then $i_{as} = -I$ and $i_{bs} = I$.
 Determine the initial, intermediate, and final positions.
 
-\renewcommand\thefigure{9.2-3}
+\renewcommand\thefigure{9.6-1}
 #+CAPTION: Two-pole, two phase, permanent-magnet stepper motor: (/a/) Axial view at $X$; (/b/) side cross-sectional view; (/c/) axial view at $Y$.
 #+ATTR_LATEX: :placement [H]
 [[./fig_9.6-1.png]]
@@ -128,25 +128,237 @@ At the next state in the sequence, the rotor advances one half step and so  $\th
 Sketch the configuration of a two-pole, four-stack, variable-reluctance stepper motor with two rotor teeth. Use $as$, $bs$, $cs$, and $ds$ to denote the phase windings.
 Calculate $TP$, $SL$, and give the excitation sequence for ccw rotation.
 *** Solution
-asdf
+#+BEGIN_SRC latex :file 1.pdf :packages '(("" "tikz")) :border 1em :results output silent
+\usetikzlibrary{shapes, positioning}
 
+\begin{tabular}{cc}
+  \begin{tikzpicture}[
+      draw=black,
+      thick,
+      text=black
+     ]
+    \node [
+      draw,
+      shape=rectangle,
+      anchor=center,
+      minimum width=2cm,
+      minimum height=0.7cm,
+      rotate around={30:(0,0)}
+    ] at (0,0) {};
+
+    \draw ([shift=(10:2cm)]0,0) arc (10:170:2cm);
+    \draw ([shift=(-10:2cm)]0,0) arc (-10:-170:2cm);
+
+    \draw (10:2cm) -- ++ (-0.7cm, 0) -- ++(0, -0.7cm);
+    \draw (-10:2cm) -- ++ (-0.7cm, 0);
+
+    \draw (170:2cm) -- ++ (0.7cm, 0) -- ++(0, -0.7cm);
+    \draw (-170:2cm) -- ++ (0.7cm, 0);
+
+    \draw (0,0) circle (3cm);
+
+    \node (root) at (0,0);
+    \node (end) at(0:3.5cm) {$as$};
+    \draw [->] (root) edge (end);
+    
+  \end{tikzpicture} &
+
+  \begin{tikzpicture}[
+      draw=black,
+      thick,
+      text=black
+     ]
+    \node [
+      draw,
+      shape=rectangle,
+      anchor=center,
+      minimum width=2cm,
+      minimum height=0.7cm,
+      rotate around={30:(0,0)}
+    ] at (0,0) {};
+
+    \draw ([shift=(10+45:2cm)]0,0) arc (10+45:170+45:2cm);
+    \draw ([shift=(-10+45:2cm)]0,0) arc (-10+45:-170+45:2cm);
+
+    \draw (10+45:2cm) -- ++ (180+45:0.7cm) -- ++(-45:0.7cm);
+    \draw (-10+45:2cm) -- ++ (180+45:0.7cm);
+
+    \draw (170+45:2cm) -- ++ (180+45:-0.7cm) -- ++(-45:0.7cm);
+    \draw (-170+45:2cm) -- ++ (180+45:-0.7cm);
+
+    \draw (0,0) circle (3cm);
+
+    \node (root) at (0,0);
+    \node (end) at(45:3.5cm) {$bs$};
+    \draw [->] (root) edge (end);
+  \end{tikzpicture} \\
+
+  \begin{tikzpicture}[
+      draw=black,
+      thick,
+      text=black
+     ]
+    \node [
+      draw,
+      shape=rectangle,
+      anchor=center,
+      minimum width=2cm,
+      minimum height=0.7cm,
+      rotate around={30:(0,0)}
+    ] at (0,0) {};
+
+    \draw ([shift=(10+90:2cm)]0,0) arc (10+90:170+90:2cm);
+    \draw ([shift=(-10+90:2cm)]0,0) arc (-10+90:-170+90:2cm);
+
+    \draw (10+90:2cm) -- ++ (180+90:0.7cm) -- ++(0:0.7cm);
+    \draw (-10+90:2cm) -- ++ (180+90:0.7cm);
+
+    \draw (170+90:2cm) -- ++ (180+90:-0.7cm) -- ++(0:0.7cm);
+    \draw (-170+90:2cm) -- ++ (180+90:-0.7cm);
+
+    \draw (0,0) circle (3cm);
+
+    \node (root) at (0,0);
+    \node (end) at(90:3.5cm) {$cs$};
+    \draw [->] (root) edge (end);
+  \end{tikzpicture} &
+
+  \begin{tikzpicture}[
+      draw=black,
+      thick,
+      text=black
+     ]
+    \node [
+      draw,
+      shape=rectangle,
+      anchor=center,
+      minimum width=2cm,
+      minimum height=0.7cm,
+      rotate around={30:(0,0)}
+    ] at (0,0) {};
+
+    \draw ([shift=(10-45:2cm)]0,0) arc (10-45:170-45:2cm);
+    \draw ([shift=(-10-45:2cm)]0,0) arc (-10-45:-170-45:2cm);
+
+    \draw (10-45:2cm) -- ++ (180-45:0.7cm) -- ++(45:-0.7cm);
+    \draw (-10-45:2cm) -- ++ (180-45:0.7cm);
+
+    \draw (170-45:2cm) -- ++ (180-45:-0.7cm) -- ++(45:-0.7cm);
+    \draw (-170-45:2cm) -- ++ (180-45:-0.7cm);
+
+    \draw (0,0) circle (3cm);
+
+    \node (root) at (0,0);
+    \node (end) at(135:3.5cm) {$ds$};
+    \draw [->] (root) edge (end);
+  \end{tikzpicture} \\
+\end{tabular}
+#+END_SRC
+
+\renewcommand\thefigure{1}
+#+CAPTION: Individual stack view of motor described in Problem 1
+[[./1.pdf]]
+
+**** $TP$
+\begin{align*}
+TP &= \frac{2\pi}{RT} \\
+&= \frac{\SI{360}{\degree}}{2} \\
+&= \SI{180}{\degree}
+\end{align*}
+**** $SL$
+\begin{align*}
+SL &= \frac{TP}{N} \\
+&= \frac{\SI{180}{\degree}}{4} \\
+&= \SI{45}{\degree}
+\end{align*}
+**** Excitation sequence -
+$as$, $bs$, $cs$, $ds$, $as$,\ldots
 ** Problem 2
 For Prob. 1, express the self-inductances and the torque using $SL$ in the arguments.
 *** Solution
-asdf
+From Chapter 9.3:
+\begin{align*}
+L_{asas} &= L_{ls} + L_A + L_B\cos{(2\theta_{rm})} \\
+L_{bsbs} &= L_{ls} + L_A + L_B\cos{(2(\theta_{rm} - SL))} \\
+L_{cscs} &= L_{ls} + L_A + L_B\cos{(2(\theta_{rm} - 2 \cdot SL))} \\
+L_{dsds} &= L_{ls} + L_A + L_B\cos{(2(\theta_{rm} - 3 \cdot SL))} \\
+\end{align*}
 
-** TODO Problem 5
+The coenergy can be expressed as:
+$$W_c = \frac{1}{2} L_{asas} i_{as}^2 + \frac{1}{2} L_{bsbs} i_{bs}^2 \frac{1}{2} L_{cscs} i_{cs}^2 + \frac{1}{2} L_{dsds} i_{ds}^2$$
+
+Which can then be used to find the torque
+\begin{align*}
+T_e &= \frac{\partial W_c}{\partial \theta_{rm}} \\
+&= -L_B\left[i_{as}^2 \sin{(2\theta_{rm})} + i_{bs}^2 \sin{(2(\theta_{rm} - SL))} + i_{cs}^2 \sin{(2(\theta_{rm} - 2 \cdot SL))} + i_{ds}^2 \sin{(2(\theta_{rm} - 3 \cdot SL))}\right]
+\end{align*}
+** Problem 5
 A four-pole, five-stack, variable-reluctance stepper motor has eight rotor teeth, as shown in Fig. 9.2-4.
 Its magnetic axes are arranged as $as$, $bs$, $cs$, $ds$, and $es$, in the counterclockwise direction.
 Express the self-inductances with the constant angular displacement in terms of step length.
-*** Solution
-asdf
 
-** TODO Problem 8
+\renewcommand\thefigure{9.2-4}
+#+CAPTION: Four-pole, three-stack, variable-reluctance stepper motor with eight rotor teeth
+#+ATTR_LATEX: :placement [H]
+[[./fig_9.2-4.png]]
+*** Solution
+From Chapter 9.3:
+\begin{align*}
+L_{asas} &= L_{ls} + L_A + L_B\cos{(8\theta_{rm})} \\
+L_{bsbs} &= L_{ls} + L_A + L_B\cos{(8(\theta_{rm} - SL))} \\
+L_{cscs} &= L_{ls} + L_A + L_B\cos{(8(\theta_{rm} - 2 \cdot SL))} \\
+L_{dsds} &= L_{ls} + L_A + L_B\cos{(8(\theta_{rm} - 3 \cdot SL))} \\
+L_{eses} &= L_{ls} + L_A + L_B\cos{(8(\theta_{rm} - 4 \cdot SL))} \\
+\end{align*}
+** Problem 8
 Consider the two-phase, permanent-magnet stepper motor of Fig. 9.6-1.
 Sketch $i_{as}$ and $i_{bs}$ versus time for the excitation sequence $i_{as}$, $i_{bs}$, $-i_{as}$, $-i_{bs}$,$i_{as}$ \ldots.
 Denote the time between steps as $T_s$ and the stepping rate as $f_s = 1/T_s$.
 Establish a relationship between the fundamental frequency $(\omega_e)$ of $i_{as}$ and $i_{bs}$, and the stepping rate $f_s$.
 Relate $\omega_{rm}$ to $\omega_{e}$ and to $f_s$.
 *** Solution
-asdf
+#+BEGIN_SRC ipython :results silent :exports none
+%matplotlib inline
+%config InlineBackend.figure_format = 'svg'
+from matplotlib import pyplot as plt
+import numpy as np
+#+END_SRC
+
+#+BEGIN_SRC ipython :results drawer :exports results
+i_as = [1, 0, -1, 0, 1, 0]
+i_bs = [0, 1, 0, -1, 0, 1]
+
+t = np.arange(len(i_as))
+
+f, axarr = plt.subplots(2, sharex=True)
+plt.setp(axarr, xticks=[])
+
+axarr[0].set_ylabel('$i_{as}$')
+axarr[1].set_ylabel('$i_{bs}$')
+
+axarr[0].axhline(linewidth='1', color='k')
+axarr[1].axhline(linewidth='1', color='k')
+
+axarr[0].step(t, i_as, where='post')
+axarr[1].step(t, i_bs, where='post')
+
+f.savefig('full_step.svg')
+
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+# Out[6]:
+[[file:./obipy-resources/wlCopz.svg]]
+:END:
+
+One full cycle involves four steps so:
+$$\frac{2\pi}{\omega_e} = 4T_s$$
+and therefore:
+$$\omega_e = \frac{2\pi}{4T_s} = \frac{\pi}{2}f_s$$
+
+Thus, $$f_s = \frac{2}{\pi} \omega_e \rarrow \omega_{rm} = SL \cdot f_s = \frac{\pi}{RT \cdot N} f_s$$
+
+For $N = 2$:
+$$\omega_{rm} = \frac{\pi}{RT \cdot 2} \frac{2}{\pi} \omega_e = \frac{\omega_e}{RT}$$
+
