@@ -1,4 +1,4 @@
-#+TITLE: ELEC 343 Assignment 2
+#+TITLE: ELEC 343 Assignment 3
 #+AUTHOR: Jasper Chan - 37467164
 
 #+OPTIONS: num:3
@@ -189,7 +189,7 @@ The motor consumes \SI{100}{\watt} at full load while operating at speed of \SI{
 The armature and field winding resistances are: $R_a = \SI{2}{\ohm}$ and $R_f = \SI{1}{\ohm}$, respectively.
 Calculate the stall torque (or the maximum starting torque) of this motor.
 *** Solution
-First we find the starting current in the motor.
+First we find the steady state current in the motor.
 \begin{align*}
 I_a &= \frac{P_\text{in}}{V_a} \\
 &= \frac{\SI{100}{\watt}}{\SI{100}{\volt}} \\
@@ -229,7 +229,7 @@ You will also need this for Part 2 of this Assignment.
 
 *** Solution
 #+ATTR_LATEX: :placement [H]
-#+CAPTION: Block diagram of a series DC motor.
+#+CAPTION: Block diagram of a series DC motor. label:series_bd
 [[./ProblemB.svg]]
 * Series and PMDC Motor Analysis
 #+BEGIN_SRC ipython :results silent :exports none
@@ -240,7 +240,15 @@ import numpy as np
 from pandas import DataFrame
 import csv
 #+END_SRC
-** Transient study
+** Block Diagrams
+*** PMDC Motor
+#+ATTR_LATEX: :placement [H]
+#+CAPTION: Block diagram of a permanent magnet DC motor. label:pm_bd
+[[./pm_motor.svg]]
+*** Series DC Motor
+See Figure ref:series_bd
+
+** Transient Study
 #+BEGIN_SRC ipython :results silent :exports none
 series_data = {
     'time': [],
@@ -308,4 +316,48 @@ f.savefig('transient.svg')
 #+ATTR_LATEX: :placement [H]
 #+CAPTION: DC Motor Transient Behavior
 [[./transient.svg]]
+** Steady State Analysis
+*** PMDC Motor
+From the simulation, the steady state values are:
+#+ATTR_LATEX: :align l | l
+| $I_a$      | \SI{0.2019}{\ampere}         |
+| $\omega_r$ | \SI{325.28}{\radian/\second} |
 
+For $\omega_r = 0$, $E_a = 0$ so the stall current can be found using
+\begin{align*}
+\left.I_a\right|_{\omega_r = 0} &= \frac{V_a}{R_A} \\
+&= \frac{(\SI{6}{\volt})}{(\SI{7}{\ohm})} \\
+&= \SI{0.8571}{\ampere}
+\end{align*}
+
+The stall torque can then be found by
+\begin{align*}
+\left.T_e\right|_{\omega_r = 0} &= k_v I_a \\
+&= (\SI{14.1}{\milli\volt\second/\radian})(\SI{0.8571}{\ampere}) \\
+&= \SI{12.08}{\milli\newton\meter}
+\end{align*}
+*** Series Motor
+From the simulation, the steady state values are:
+#+ATTR_LATEX: :align l | l
+| $I_a$      | \SI{0.3524}{\ampere}         |
+| $\omega_r$ | \SI{228.49}{\radian/\second} |
+
+For $\omega_r = 0$, $E_a = 0$ so the stall current can be found using
+\begin{align*}
+\left.I_a\right|_{\omega_r = 0} &= \frac{V_a}{R_A + R_F} \\
+&= \frac{(\SI{6}{\volt})}{(\SI{6}{\ohm}) + (\SI{1}{\ohm})} \\
+&= \SI{0.8571}{\ampere}
+\end{align*}
+
+The stall torque can then be found by
+\begin{align*}
+\left.T_e\right|_{\omega_r = 0} &= L_{AF} I_a^2 \\
+&= (\SI{39.5}{\milli\henry})(\SI{0.8571}{\ampere})^2 \\
+&= \SI{29.02}{\milli\newton\meter}
+\end{align*}
+*** Analysis
+The calculated values are higher than the peak values from the simulation.
+However, they are relatively correct in that the series motor stall torque is was both simulated and calculated to be highter.
+
+The discrepancy comes from the fact that the calculations take a simplistic approach and don't account for the time it takes for the coils to energize and actually impart a torque on the armature.
+The simulation takes this time into account, which means it finds a lower starting torque
