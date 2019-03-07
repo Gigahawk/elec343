@@ -1,0 +1,152 @@
+#+TITLE: ELEC 343 Assignment 4
+#+AUTHOR: Jasper Chan - 37467164
+
+#+OPTIONS: num:3
+
+#+LATEX_HEADER: \setlength{\parindent}{0pt}
+#+LATEX_HEADER: \usepackage{steinmetz}
+#+LATEX_HEADER: \usepackage{siunitx}
+#+LATEX_HEADER: \DeclareSIUnit\inch{in}
+#+LATEX_HEADER: \DeclareSIUnit\ounce{oz}
+#+LATEX_HEADER: \DeclareSIUnit\rpm{rpm}
+#+LATEX_HEADER: \DeclareSIUnit\hp{hp}
+#+LATEX_HEADER: \usepackage{tikz}
+\sisetup{inter-unit-product=\cdot}
+* Chapter 9.2 Study Problems
+** SP9.2-2
+Consider the two-pole, two-phase reluctance motor shown in Fig 4.6-1/b/.
+Calculate \\
+(a) $TP$ \\
+(b) $SL$ and \\
+(c) determine the direction of rotation when a dc voltage is switched from the /as/ winding to the /bs/ winding.
+
+\renewcommand\thefigure{4.6-1}
+#+CAPTION: Elementary two-pole reluctance machines. (/a/) Single-phase; (/b/) two-phase.
+#+ATTR_LATEX: :placement [H]
+[[./fig_4.6-1.png]]
+*** Solution
+**** (a)
+From textbook equation (9.2-1):
+$$TP = \frac{2\pi}{RT}$$
+From the figure we can see that the rotor only has two teeth:
+\begin{align*}
+TP &= \frac{2\pi}{RT} \\
+&= \frac{2\pi}{2} \\
+&= \pi = \SI{180}{\degree}
+\end{align*}
+**** (b)
+From textbook equation (9.2-3):
+$$SL = \frac{TP}{N}$$
+From the figure we can see that the rotor has two stacks:
+\begin{align*}
+SL &= \frac{TP}{N} \\
+&= \frac{\SI{180}{\degree}}{2} \\
+&= \SI{90}{\degree}
+\end{align*}
+**** (c)
+Because of the arrangement of the teeth, the motor could spin in either direction.
+* Chapter 9.3 Study Problems
+** SP9.3-2
+The stator currents of a three-stack, variable-reluctance machine are $i_{as} = I$, $i_{bs} = -I$, and $i_{cs} = 0$.
+Determine the no-load rotor position.
+*** Solution
+From textbook equation (9.3-30) with $T_e = i_cs = 0$:
+$$0 = i_{as}^2 \sin{\left(\frac{2\pi}{TP} \theta_{rm}\right)} + i_{bs}^2 \sin{\left(\frac{2\pi}{TP}\left(\theta_{rm} \pm \frac{TP}{N}\right)\right)}$$ 
+
+Subbing in the given values 
+$$0 = \sin{\left(\frac{2\pi}{TP} \theta_{rm}\right)} + \sin{\left(\frac{2\pi}{TP}\left(\theta_{rm} \pm \frac{TP}{3}\right)\right)}$$ 
+
+Since $\sin{x} = -\sin{-x}$, we can find that
+\begin{align*}
+\theta_{rm} &= -\theta_{rm} \mp \frac{TP}{3} \\
+2\theta_{rm} &= \mp \frac{TP}{3} \\
+\theta_{rm} &= \mp \frac{TP}{6} \\
+&=\pm \frac{TP}{6}
+\end{align*}
+
+* Chapter 9.4 Study Problems
+** SP9.4-2
+It is desirable to step from $\theta_{rm} = 0$ to $\theta_{rm} = -SL/3$ for the device shown in Fig. 9.2-3.
+Assume that we have the facility to control the winding currents. Let $i_as = I$; determine $i_bs$.
+
+\renewcommand\thefigure{9.2-3}
+#+CAPTION: Four-pole, three-stack, variable-reluctance stepper motor with four rotor teeth
+#+ATTR_LATEX: :placement [H]
+[[./fig_9.2-3.png]]
+
+*** Solution
+From textbook equation (9.3-29) with $T_e = i_cs = 0$:
+$$0 = i_{as}^2 \sin{\left(RT \cdot \theta_{rm}\right)} + i_{bs}^2 \sin{\left(RT \cdot \left(\theta_{rm} + SL\right)\right)}$$ 
+
+Subbing in the given values 
+\begin{align*}
+0 &= I^2 \sin{\left(RT \cdot \left(-\frac{SL}{3}\right)\right)} + i_{bs}^2 \sin{\left(RT \cdot \left(\left(-\frac{SL}{3}\right) + SL\right)\right)} \\
+0 &= I^2 \sin{\left(RT \cdot \left(-\frac{SL}{3}\right)\right)} + i_{bs}^2 \sin{\left(RT \cdot \left(\frac{2}{3}\right) SL\right)} \\
+i_{bs}^2 &= I^2 \frac{\sin{\left(RT \cdot \left(-\frac{SL}{3}\right)\right)}} {-\sin{\left(RT \cdot \left(\frac{2}{3}\right) SL\right)}} \\
+i_{bs}^2 &= I^2 \frac{\sin{\left(RT \cdot \left(\frac{SL}{3}\right)\right)}} {\sin{\left(RT \cdot \left(\frac{2}{3}\right) SL\right)}} \\
+i_{bs} &= \sqrt{I^2 \frac{\sin{\left((4) \cdot \left(\frac{(\SI{30}{\degree})}{3}\right)\right)}} {\sin{\left((4) \cdot \left(\frac{2}{3}\right) (\SI{30}{\degree})\right)}}} \\
+&= 0.81 I
+\end{align*}
+
+Since $\sin{x} = -\sin{-x}$, we can find that
+\begin{align*}
+\theta_{rm} &= -\theta_{rm} \mp \frac{TP}{3} \\
+2\theta_{rm} &= \mp \frac{TP}{3} \\
+\theta_{rm} &= \mp \frac{TP}{6} \\
+&=\pm \frac{TP}{6}
+\end{align*}
+
+* Chapter 9.6 Study Problems
+** SP9.6-1
+Consider the device shown in Fig. 9.6-1.
+The load torque is zero.
+Initially $i_{as} = I$ and $i_{bs} = 0$.
+From this condition, the following sequence occurs: $i_{as} = 0$ and $i_{bs} = I$, then $i_{as} = -I$ and $i_{bs} = I$.
+Determine the initial, intermediate, and final positions.
+
+\renewcommand\thefigure{9.2-3}
+#+CAPTION: Two-pole, two phase, permanent-magnet stepper motor: (/a/) Axial view at $X$; (/b/) side cross-sectional view; (/c/) axial view at $Y$.
+#+ATTR_LATEX: :placement [H]
+[[./fig_9.6-1.png]]
+
+*** Solution
+The step length can be calculated as
+\begin{align*}
+SL &= \frac{\pi}{RT \cdot N} \\
+&= \frac{\SI{180}{\degree}}{(5)(2)} \\
+&= \SI{18}{\degree}
+\end{align*}
+
+**** Initial position - 
+$\theta_{rm} = 0$.
+**** Intermediate position - 
+At the next state in the sequence, the rotor advances one full step and so  $\theta_{rm} = \SI{18}{\degree}$
+**** Final position - 
+At the next state in the sequence, the rotor advances one half step and so  $\theta_{rm} = \SI{27}{\degree}$
+* Textbook Chapter 9 Problems
+** Problem 1
+Sketch the configuration of a two-pole, four-stack, variable-reluctance stepper motor with two rotor teeth. Use $as$, $bs$, $cs$, and $ds$ to denote the phase windings.
+Calculate $TP$, $SL$, and give the excitation sequence for ccw rotation.
+*** Solution
+asdf
+
+** Problem 2
+For Prob. 1, express the self-inductances and the torque using $SL$ in the arguments.
+*** Solution
+asdf
+
+** TODO Problem 5
+A four-pole, five-stack, variable-reluctance stepper motor has eight rotor teeth, as shown in Fig. 9.2-4.
+Its magnetic axes are arranged as $as$, $bs$, $cs$, $ds$, and $es$, in the counterclockwise direction.
+Express the self-inductances with the constant angular displacement in terms of step length.
+*** Solution
+asdf
+
+** TODO Problem 8
+Consider the two-phase, permanent-magnet stepper motor of Fig. 9.6-1.
+Sketch $i_{as}$ and $i_{bs}$ versus time for the excitation sequence $i_{as}$, $i_{bs}$, $-i_{as}$, $-i_{bs}$,$i_{as}$ \ldots.
+Denote the time between steps as $T_s$ and the stepping rate as $f_s = 1/T_s$.
+Establish a relationship between the fundamental frequency $(\omega_e)$ of $i_{as}$ and $i_{bs}$, and the stepping rate $f_s$.
+Relate $\omega_{rm}$ to $\omega_{e}$ and to $f_s$.
+*** Solution
+asdf
