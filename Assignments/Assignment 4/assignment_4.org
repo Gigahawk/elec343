@@ -87,15 +87,6 @@ i_{bs}^2 &= I^2 \frac{\sin{\left(RT \cdot \left(\frac{SL}{3}\right)\right)}} {\s
 i_{bs} &= \sqrt{I^2 \frac{\sin{\left((4) \cdot \left(\frac{(\SI{30}{\degree})}{3}\right)\right)}} {\sin{\left((4) \cdot \left(\frac{2}{3}\right) (\SI{30}{\degree})\right)}}} \\
 &= 0.81 I
 \end{align*}
-
-Since $\sin{x} = -\sin{-x}$, we can find that
-\begin{align*}
-\theta_{rm} &= -\theta_{rm} \mp \frac{TP}{3} \\
-2\theta_{rm} &= \mp \frac{TP}{3} \\
-\theta_{rm} &= \mp \frac{TP}{6} \\
-&=\pm \frac{TP}{6}
-\end{align*}
-
 * Chapter 9.6 Study Problems
 ** SP9.6-1
 Consider the device shown in Fig. 9.6-1.
@@ -348,8 +339,8 @@ f.savefig('full_step.svg')
 
 #+RESULTS:
 :RESULTS:
-# Out[6]:
-[[file:./obipy-resources/wlCopz.svg]]
+# Out[4]:
+[[file:./obipy-resources/Kd6sNy.svg]]
 :END:
 
 One full cycle involves four steps so:
@@ -357,7 +348,7 @@ $$\frac{2\pi}{\omega_e} = 4T_s$$
 and therefore:
 $$\omega_e = \frac{2\pi}{4T_s} = \frac{\pi}{2}f_s$$
 
-Thus, $$f_s = \frac{2}{\pi} \omega_e \rarrow \omega_{rm} = SL \cdot f_s = \frac{\pi}{RT \cdot N} f_s$$
+Thus, $$f_s = \frac{2}{\pi} \omega_e \rightarrow \omega_{rm} = SL \cdot f_s = \frac{\pi}{RT \cdot N} f_s$$
 
 For $N = 2$:
 $$\omega_{rm} = \frac{\pi}{RT \cdot 2} \frac{2}{\pi} \omega_e = \frac{\omega_e}{RT}$$
