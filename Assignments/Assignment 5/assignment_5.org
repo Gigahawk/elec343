@@ -92,8 +92,8 @@ $$K_s^r = \begin{bmatrix} -\sin{\theta_r} & \cos{\theta_r} \\ \cos{\theta_r} & \
 ** Problem 9
 Refer to Example 7B.
 Calculate $I_{ds}^r$, $I_{fd}^{\prime r}$, and the torque output in \si{\newton\meter} for each mode of operation described.
-*** TODO Solution
-$\sqrt{2} \tilde{I}_{as} e^{-j\delta} = I_{qs}^ - jI_{ds}^r$.
+*** Solution
+$$\sqrt{2} \tilde{I}_{as} e^{-j\delta} = I_{qs}^ - jI_{ds}^r$$
 From Example 7B(a),
 \begin{align*}
 \sqrt{2} \tilde{I}_{as} e^{-j\delta} &= \sqrt{2} (\SI{52.5}{\ampere} \phase{\ang{-30}}) e^{-j(\ang{-23.4})} \\
@@ -165,12 +165,14 @@ Note that, in Example 7C, \delta was found to be \ang{-17.4} which checks with t
     text=black
   ]
     \coordinate (root) at (0,0);
-    \coordinate [label=45:$-\tilde{I}_{as} r_s$] (right) at (0:5cm);
-    \coordinate (bot) at (-20:4cm);
+    \coordinate (right) at (-1:5cm);
+    \path (right) + (130: 0.2cm) coordinate (topright) + (130+90:2cm) coordinate (bot);
+    %\coordinate (bot) at (-20:4cm);
     \coordinate (ias) at (-45:2cm);
 
     \draw [->] (root) -- (right) node[midway, above] {$\tilde{V}_{as}$};
-    \draw [->] (right) -- (bot) node[midway, right] {$-j\tilde{I}_{as}\omega_rL_q$};
+    \draw [->] (right) -- (topright) node[midway, right] {$-\tilde{I}_{as}r_s$};
+    \draw [->] (topright) -- (bot) node[midway, right] {$-j\tilde{I}_{as}\omega_rL_q$};
     \draw [->] (root) -- (bot) node[midway, below] {$\tilde{E}_a$};
     \draw [->] (root) -- (ias) node[midway, below] {$\tilde{I}_{as}$};
     
@@ -189,8 +191,8 @@ Calculate $V_{fd}^{\prime r}$ and $E_{fd}^{\prime r}$ for this condition.
 #+CAPTION: Dynamic performance of a two-phase synchronous generator during a step decrease in load torque (step increase in input torque).
 #+ATTR_LATEX: :placement [H]
 [[./fig_7.8-1.png]]
-*** TODO Solution
-$\tilde{V}_{as} = (r_s + jX_q)\tilde{I}_{as} + \tilde{E}_a$
+*** Solution
+$$\tilde{V}_{as} = (r_s + jX_q)\tilde{I}_{as} + \tilde{E}_a$$
 
 For open circuit conditions:
 \begin{align*}
