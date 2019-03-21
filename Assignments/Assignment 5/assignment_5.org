@@ -1,0 +1,214 @@
+#+TITLE: ELEC 343 Assignment 5
+#+AUTHOR: Jasper Chan - 37467164
+
+#+OPTIONS: num:3
+
+#+LATEX_HEADER: \setlength{\parindent}{0pt}
+#+LATEX_HEADER: \usepackage{steinmetz}
+#+LATEX_HEADER: \usepackage{siunitx}
+#+LATEX_HEADER: \DeclareSIUnit\inch{in}
+#+LATEX_HEADER: \DeclareSIUnit\ounce{oz}
+#+LATEX_HEADER: \DeclareSIUnit\rpm{rpm}
+#+LATEX_HEADER: \DeclareSIUnit\hp{hp}
+#+LATEX_HEADER: \usepackage{tikz}
+#+LATEX_HEADER: \usepackage{breqn}
+\sisetup{inter-unit-product=\cdot}
+* Chapter 7.3 Study Problems
+** SP7.3-2
+The current $i_{fd}$ in Fig 7.2-1 is \SI{1}{\ampere}, $L_{sfd} = \SI{0.1}{\henry}$, and $\theta_r = 10t$.
+Determine the open-circuited steady-state voltages $V_{as}$ and $V_{bs}$.
+\renewcommand\thefigure{7.2-1}
+#+CAPTION: Two-pole, two-phase synchronous machine.
+#+ATTR_LATEX: :placement [H]
+[[./fig_7.2-1.png]]
+*** Solution
+$$v_{as} = r_s i_{as} + L_{asas} \frac{di_{as}}{dt} + \frac{d}{dt}(L_{asfd} i_{fd})$$
+Because $as$ and $bs$ are open circuited, $i_{as} = 0$,
+$$v_{as} = L_{asfd} \frac{di_{fd}}{dt} + i_{fd} \frac{dL_{asfd}}{dt}$$
+Since $i_{fd}$ is a constant,
+\begin{align*}
+v_{as} &= i_{fd} \frac{\partial L_{asfd}}{\partial \theta_r} \frac{d\theta_r}{dt} \\
+&= i_{fd} \cdot \omega_r \cdot L_{sfd} \cos{\theta_r}
+\end{align*}
+Since $\omega_r = \frac{d\theta_r}{dt} = 10$:
+\begin{align*}
+V_{as} &= (\SI{1}{\ampere})(10)(\SI{0.1}{\henry}) \cos{10t} \\
+&= \cos{10t} \hphantom{\cdot} \si{\volt}
+\end{align*}
+
+In a similar fashion:
+\begin{align*}
+v_{bs} &= i_{fd} \frac{\partial L_{bsfd}}{\partial \theta_r} \frac{d \theta_r}{dt} \\
+&= i_{fd} \cdot \omega_r \cdot L_{sfd} \sin{\theta_r} \\
+&= (\SI{1}{\ampere})(10)(\SI{0.1}{\henry}) \sin{10t} \\
+&= \sin{10t} \hphantom{\cdot} \si{\volt}
+\end{align*}
+* Chapter 7.4 Study Problems
+** SP7.4-1
+Which of the terms on the right hand side of (7.4-2) can be thought of as the reluctance torque?
+\begin{dmath}[number=7.4-2]
+T_e = \frac{P}{2} \left\{ \frac{L_{md} - L_{mq}}{2} \left[ (i_{as}^2 - i_{bs}^2) \sin{2\theta_r} - 2i_{as}i_{bs} \cos{2\theta_r} \right] - L_{mq}i_{kq}'(i_{as} \sin{\theta_r} - i_{bs} \cos{\theta_r}) + L_{md}(i_{fd}' + i_{kd}') (i_{as}\cos{\theta_r} + i_{bs}\sin{\theta_r}) \right \}
+\end{dmath}
+*** Solution
+When $L_{mq} = L_{md}$ the term inside the square brackets disappears.
+This is the reluctance torque.
+** SP7.4-3
+Repeat SP7.4-1 for the torque due to the interraction of $\text{mmf}_s$ and the $fd$ current.
+*** Solution
+The terms containing $i_{fd}', which also multiplies only the stator currents.
+* Chapter 7.7 Study Problems
+** SP7.7-4
+The reluctance machine in Example 7C is operating as a motor with $\delta = \SI{-30}{\degree}$.
+Calculate $T_e$.
+Neglect $r_s$.
+*** Solution
+From (7.7-30) with $E_{xfd}^{\prime r}$ terms eliminated:
+$$T_e = -\frac{P}{2}\frac{1}{\omega_e} \left[ \frac{1}{2} \left( \frac{1}{X_q} - \frac{1}{X_d} \right) \left(\sqrt{2} V_s\right)^2 \sin{2\delta} \right] $$
+From Example 7C:
+\begin{align*}
+P &= 2 \\
+\omega_e &= \SI{377}{\radian/\second} \\
+V_s &= \SI{110}{\volt} \\
+X_q &= (\omega_e) (L_{mq} + L_{ls}) & X_d &= (\omega_e) (L_{md} + L_{ls})\\
+&= (\SI{377}{\radian/\second})(\SI{0.02}{\henry} + \SI{0.005}{\henry}) & &= (\SI{377}{\radian/\second})(\SI{0.10}{\henry} + \SI{0.005}{\henry}) \\
+&= \SI{9.43}{\ohm} & &= \SI{39.59}{\ohm}
+\end{align*}
+With these values we can calculate $T_e$
+\begin{align*}
+T_e &= -\frac{(2)}{2}\frac{1}{(\SI{377}{\radian/\second})} \left[ \frac{1}{2} \left( \frac{1}{(\SI{9.43}{\ohm})} - \frac{1}{(\SI{39.59}{\ohm})} \right) \left(\sqrt{2} (\SI{110}{\volt})\right)^2 \sin{(2\cdot(\SI{-30}{\degree}))} \right]\\
+&= \SI{2.245}{\newton \meter}
+\end{align*}
+
+* Textbook Chapter 7 Problems
+** Problem 3
+Write Park's transformation ($\mathbf{K}_s^r$) with $\theta_r$ referenced to the $d$ axis as in Fig 7.12-1
+\renewcommand\thefigure{7.12-1}
+#+CAPTION: Two-pole, two-phase, salient-pole synchronous machine.
+#+ATTR_LATEX: :placement [H]
+[[./fig_7.12-1.png]]
+*** Solution
+From (5.3-4):
+$$K_s^r = \begin{bmatrix} -\sin{\theta_r} & \cos{\theta_r} \\ \cos{\theta_r} & \sin{\theta_r} \end{bmatrix}$$
+** Problem 9
+Refer to Example 7B.
+Calculate $I_{ds}^r$, $I_{fd}^{\prime r}$, and the torque output in \si{\newton\meter} for each mode of operation described.
+*** TODO Solution
+$\sqrt{2} \tilde{I}_{as} e^{-j\delta} = I_{qs}^ - jI_{ds}^r$.
+From Example 7B(a),
+\begin{align*}
+\sqrt{2} \tilde{I}_{as} e^{-j\delta} &= \sqrt{2} (\SI{52.5}{\ampere} \phase{\ang{-30}}) e^{-j(\ang{-23.4})} \\
+&= \SI{74.2}{\ampere} \phase{\ang{-6.6}} \\
+&= (73.8 - j8.53) \si{\ampere}
+\end{align*}
+
+\begin{align*}
+I_{qs}^r &= \SI{73.8}{\ampere} & I_{ds}^r &= \SI{8.53}{\ampere} \\
+P_{\text{in}} &= \SI{40}{\kilo\watt}
+\end{align*}
+
+\begin{align*}
+2 | \tilde{I}_{as} |^2 r_s &= (2)(52.5)^2(0.3) \\
+&= \SI{1.654}{\kilo\watt} \\
+\\
+T_e &= \frac{P_{\text{out}}}{\omega_{rm}} \\
+&= \frac{\SI{40}{\kilo\watt} - \SI{1.654}{\kilo\watt}}{\SI{377}{\radian/\second} \left(\frac{2}{6}\right)} \\
+&= \SI{305}{\newton\meter}
+\end{align*}
+
+This is essentially the torque for all parts since only the $|\tilde{I}_{as}|^2 r_s$ terms change in (b) and its magnitude is insignificant compared to the total power input.
+
+From Example 7(b):
+\begin{align*}
+\sqrt{2} \tilde{I}_{as} e^{-j\delta} &= \sqrt{2} (\SI{45.4}{\ampere} \phase{\ang{0}}) e^{-j(\ang{-19.9})} \\
+&= \SI{64.2}{\ampere} \phase{\ang{19.9}} \\
+&= (60.4 - j21.9) \si{\ampere}
+\end{align*}
+
+\begin{align*}
+I_{qr}^s &= \SI{60.4}{\ampere} & I_{dr}^s &= \SI{-21.9}{\ampere} \\
+\end{align*}
+
+From Example 7(c):
+\begin{align*}
+\sqrt{2} \tilde{I}_{as} e^{-j\delta} &= \sqrt{2} (\SI{52.5}{\ampere} \phase{\ang{30}}) e^{-j(\ang{-17.4})} \\
+&= \SI{74.2}{\ampere} \phase{\ang{47.4}} \\
+&= (50.3 - j54.7) \si{\ampere}
+\end{align*}
+
+\begin{align*}
+I_{qr}^s &= \SI{50.3}{\ampere} & I_{dr}^s &= \SI{-54.7}{\ampere} \\
+\end{align*}
+
+** Problem 10
+Refer to Example 7C.
+Calculate $\tilde{E}_a$ and draw the phasor diagram showing $\tilde{V}_{as}$, $\tilde{I}_{as}$, $\tilde{E}_{a}$, and $(r_s + jX_q)\tilde{I}_{as}$.
+*** Solution
+From Example 7C:
+\begin{align*}
+\tilde{V}_{as} &= \SI{110}{\volt} \phase{\ang{0}} & \tilde{I}_{as} &= \SI{4.55}{\ampere} \phase{\ang{-51.6}}
+\end{align*}
+\begin{align*}
+\tilde{E}_a &= \tilde{V}_{as} - (r_s + jX_q)\tilde{I}_{as} \\
+&= (\SI{110}{\volt} \phase{\ang{0}}) - \left((1) + j(\SI{377}{\radian/\second})(\SI{0.005}{\henry} + \SI{0.02}{\henry})\right)(\SI{4.55}{\ampere} \phase{\ang{-51.6}}) \\
+&= (\SI{110}{\volt} \phase{\ang{0}}) - (\SI{43.1}{\volt} \phase{\ang{32.3}}) \\
+&= \SI{77.1}{\volt} \phase{\ang{-17.4}}
+\end{align*}
+
+Note that, in Example 7C, \delta was found to be \ang{-17.4} which checks with th above calculation.
+
+#+BEGIN_SRC latex :file 10.pdf :packages '(("" "tikz")) :border 1em :results output silent
+\usetikzlibrary{shapes, positioning}
+
+\begin{tikzpicture}[
+    draw=black,
+    thick,
+    text=black
+  ]
+    \coordinate (root) at (0,0);
+    \coordinate [label=45:$-\tilde{I}_{as} r_s$] (right) at (0:5cm);
+    \coordinate (bot) at (-20:4cm);
+    \coordinate (ias) at (-45:2cm);
+
+    \draw [->] (root) -- (right) node[midway, above] {$\tilde{V}_{as}$};
+    \draw [->] (right) -- (bot) node[midway, right] {$-j\tilde{I}_{as}\omega_rL_q$};
+    \draw [->] (root) -- (bot) node[midway, below] {$\tilde{E}_a$};
+    \draw [->] (root) -- (ias) node[midway, below] {$\tilde{I}_{as}$};
+    
+  \end{tikzpicture}
+#+END_SRC
+
+\renewcommand\thefigure{1}
+#+CAPTION: Phasor diagram for Example 7C
+#+ATTR_LATEX: :placement [H] :width 0.7\textwidth
+[[./10.pdf]]
+
+** Problem 11
+In Fig. 7.8-1, the field voltage is adjusted so that the open-circuit stator phase voltage would be equal to rated voltage if the rotor were driven at snychronous speed.
+Calculate $V_{fd}^{\prime r}$ and $E_{fd}^{\prime r}$ for this condition.
+\renewcommand\thefigure{7.8-1}
+#+CAPTION: Dynamic performance of a two-phase synchronous generator during a step decrease in load torque (step increase in input torque).
+#+ATTR_LATEX: :placement [H]
+[[./fig_7.8-1.png]]
+*** TODO Solution
+$\tilde{V}_{as} = (r_s + jX_q)\tilde{I}_{as} + \tilde{E}_a$
+
+For open circuit conditions:
+\begin{align*}
+\tilde{V}_{as} &= \tilde{E}_a \\
+\tilde{E}_a &= \frac{1}{\sqrt{2}} \left[ (X_d - X_q) I_{ds} + X_{md} I_{fd}^{\prime r} \right] e^{j\delta}
+\end{align*}
+
+With $\tilde{I}_{as} = 0$ and $\tilde{V}_{as} = \SI{440}{\volt} \phase{\ang{0}}$
+\begin{align*}
+\tilde{E}_a &= \frac{1}{\sqrt{2}}  X_{md} I_{fd}^{\prime r} \phase{\ang{0}} = \SI{440}{\volt} \phase{\ang{0}} \\
+\\
+I_{fd}^{\prime r} &= \frac{\SI{440}{\volt} \sqrt{2}}{(\SI{377}{\radian/\second})(\SI{13.7}{\milli\henry})} \\
+&= \SI{120.5}{\ampere} \\
+\\
+V_{fd}^{\prime r} &= r_{fd}' I_{fd}^{\prime r} \\
+&= (\SI{0.13}{\ohm})(\SI{120.5}{\ampere}) \\
+&= \SI{15.7}{\volt}
+\end{align*}
+
+The value of $I_{fd}^{\prime r}$ in Fig 7.8-1 appears to be slightly less than \SI{125}{\ampere}.
+However, the graph scale makes it hard to verify.
