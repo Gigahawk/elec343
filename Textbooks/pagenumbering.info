@@ -1,0 +1,15 @@
+[/_objdef {p1} /type /dict /OBJ pdfmark
+
+[
+    {p1} <<
+        /Nums [
+            0 << /S /r >> % Start pages with roman numerals
+            14 << /S /D >> % Start 15th page with arabic numerals
+            109 << /S /D /St 97 >> % I have no idea what happened to page 96
+            156 << /S /D /St 145 >> %  or page 144
+            297 << /S /D /St 287 >> %  or page 286...
+            354 << /S /D /St 345 >> %  yea this is really stupid
+            423 << /S /D /St 415 >>
+        ] >> /PUT pdfmark
+
+[{Catalog} <</PageLabels {p1}>> /PUT pdfmark

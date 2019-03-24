@@ -1,0 +1,560 @@
+[
+    {
+        "title": "CONTENTS",
+        "page": 5,
+        "no_offset": true,
+        "no_number": true
+    },
+    {
+        "title": "PREFACE",
+        "page": 11,
+        "no_offset": true,
+        "no_number": true
+    },
+
+    {
+        "title": "MAGNETIC AND MAGNETICALLY COUPLED CIRCUITS",
+        "page" : 1,
+        "chapters": [
+            {
+                "title": "INTRODUCTION",
+                "page": 1
+            },
+            {
+                "title": "PHASOR ANALYSIS",
+                "page": 2
+            },
+            {
+                "title": "MAGNETIC CIRCUITS",
+                "page": 9
+            },
+            {
+                "title": "PROPERTIES OF MAGNETIC MATERIALS",
+                "page": 16
+            },
+            {
+                "title": "STATIONARY AND MAGNETICALLY COUPLED CIRCUITS",
+                "page": 21
+            },
+            {
+                "title": "OPEN- AND SHORT-CIRCUIT CHARACTERISTICS OF STATIONARY MAGNETICALLY COUPLED CIRCUITS",
+                "page": 30
+            },
+            {
+                "title": "MAGNETIC SYSTEMS WITH MECHANICAL MOTION",
+                "page": 36
+            },
+            {
+                "title": "RECAPPING",
+                "page": 45
+            },
+            {
+                "title": "REFERENCES",
+                "page": 45
+            },
+            {
+                "title": "PROBLEMS",
+                "page": 45
+            }
+        ]
+    },
+
+    {
+        "title": "ELECTROMECHANICAL ENERGY CONVERSION",
+        "page" : 49,
+        "chapters": [
+            {
+                "title": "INTRODUCTION",
+                "page": 49
+            },
+            {
+                "title": "ENERGY BALANCE RELATIONSHIPS",
+                "page": 50
+            },
+            {
+                "title": "ENERGY IN COUPLING FIELD",
+                "page": 57
+            },
+            {
+                "title": "GRAPHICAL INTERPRETATION OF ENERGY CONVERSION",
+                "page": 65
+            },
+            {
+                "title": "ELECTROMAGNETIC AND ELECTROSTATIC FORCES",
+                "page": 68
+            },
+            {
+                "title": "OPERATING CHARACTERISTICS OF AN ELEMENTARY ELECTROMAGNET",
+                "page": 74
+            },
+            {
+                "title": "SINGLE-PHASE RELUCTANCE MACHINE",
+                "page": 80
+            },
+            {
+                "title": "WINDINGS IN RELATIVE MOTION",
+                "page": 86
+            },
+            {
+                "title": "RECAPPING",
+                "page": 90
+            },
+            {
+                "title": "PROBLEMS",
+                "page": 90
+            }
+        ]
+    },
+
+    {
+        "title": "DIRECT-CURRENT MACHINES",
+        "page" : 97,
+        "chapters": [
+            {
+                "title": "INTRODUCTION",
+                "page": 97
+            },
+            {
+                "title": "ELEMENTARY DIRECT-CURRENT MACHINE",
+                "page": 98
+            },
+            {
+                "title": "VOLTAGE AND TORQUE EQUATIONS",
+                "page": 108
+            },
+            {
+                "title": "PERMANENT-MAGNET dc MACHINE",
+                "page": 111
+            },
+            {
+                "title": "DYNAMIC CHARACTERISTICS OF A PERMANENT-MAGNET dc MOTOR",
+                "page": 116
+            },
+            {
+                "title": "INTRODUCTION TO CONSTANT-TORQUE AND CONSTANT-POWER OPERATION",
+                "page": 119
+            },
+            {
+                "title": "TIME-DOMAIN BLOCK DIAGRAM AND STATE EQUATIONS FOR THE PERMANENT-MAGNET dc MACHINE",
+                "page": 128
+            },
+            {
+                "title": "AN INTRODUCTION TO VOLTAGE CONTROL",
+                "page": 132
+            },
+            {
+                "title": "RECAPPING",
+                "page": 141
+            },
+            {
+                "title": "REFERENCES",
+                "page": 142
+            },
+            {
+                "title": "PROBLEMS",
+                "page": 142
+            }
+        ]
+    },
+
+    {
+        "title": "WINDINGS AND ROTATING MAGNETOMOTIVE FORCE",
+        "page" : 145,
+        "chapters": [
+            {
+                "title": "INTRODUCTION",
+                "page": 145
+            },
+            {
+                "title": "WINDINGS",
+                "page": 146
+            },
+            {
+                "title": "AIR-GAP MMF—SINUSOIDALLY DISTRIBUTED WINDINGS",
+                "page": 149
+            },
+            {
+                "title": "ROTATING AIR-GAP MMF — TWO-POLE DEVICES",
+                "page": 156
+            },
+            {
+                "title": "P-POLE MACHINES",
+                "page": 164
+            },
+            {
+                "title": "INTRODUCTION TO SEVERAL ELECTROMECHANICAL MOTION DEVICES",
+                "page": 171
+            },
+            {
+                "title": "RECAPPING",
+                "page": 180
+            },
+            {
+                "title": "PROBLEMS",
+                "page": 180
+            }
+        ]
+    },
+
+    {
+        "title": "INTRODUCTION TO REFERENCE-FRAME THEORY",
+        "page" : 185,
+        "chapters": [
+            {
+                "title": "INTRODUCTION",
+                "page": 185
+            },
+            {
+                "title": "BACKGROUND",
+                "page": 187
+            },
+            {
+                "title": "EQUATIONS OF TRANSFORMATION — CHANGE OF VARIABLES",
+                "page": 188
+            },
+            {
+                "title": "TRANSFORMATION OF STATIONARY CIRCUIT VARIABLES TO THE ARBITRARY FRAME OF REFERENCE",
+                "page": 192
+            },
+            {
+                "title": "TRANSFORMATION OF A BALANCED SET AND STEADY-STATE BALANCED OPERATION",
+                "page": 197
+            },
+            {
+                "title": "VARIABLES OBSERVED FROM SEVERAL FRAMES OF REFERENCE",
+                "page": 202
+            },
+            {
+                "title": "EQUATIONS OF TRANSFORMATION FOR THREE-PHASE SYSTEMS",
+                "page": 208
+            },
+            {
+                "title": "RECAPPING",
+                "page": 210
+            },
+            {
+                "title": "REFERENCES",
+                "page": 210
+            },
+            {
+                "title": "PROBLEMS",
+                "page": 211
+            }
+        ]
+    },
+
+    {
+        "title": "SYMMETRICAL INDUCTION MACHINES",
+        "page" : 213,
+        "chapters": [
+            {
+                "title": "INTRODUCTION",
+                "page": 213
+            },
+            {
+                "title": "TWO-PHASE INDUCTION MACHINE",
+                "page": 214
+            },
+            {
+                "title": "VOLTAGE EQUATIONS AND WINDING INDUCTANCES",
+                "page": 220
+            },
+            {
+                "title": "TORQUE",
+                "page": 226
+            },
+            {
+                "title": "VOLTAGE EQUATIONS IN THE ARBITRARY REFERENCE FRAME",
+                "page": 228
+            },
+            {
+                "title": "MAGNETICALLY LINEAR FLUX LINKAGE EQUATIONS AND EQUIVALENT CIRCUITS",
+                "page": 232
+            },
+            {
+                "title": "TORQUE EQUATIONS IN ARBITRARY REFERENCE FRAME VARIABLES",
+                "page": 224
+            },
+            {
+                "title": "ANALYSIS OF STEADY-STATE OPERATION",
+                "page": 238
+            },
+            {
+                "title": "DYNAMIC AND STEADY-STATE PERFORMANCE MACHINE VARIABLES",
+                "page": 251
+            },
+            {
+                "title": "FREE ACCELERATION VIEWED FROM STATIONARY, ROTOR, AND SYNCHRONOUSLY ROTATING REFERENCE FRAMES",
+                "page": 262
+            },
+            {
+                "title": "INTRODUCTION TO FIELD-ORIENTED CONTROL",
+                "page": 266
+            },
+            {
+                "title": "THREE-PHASE INDUCTION MACHINE",
+                "page": 273
+            },
+            {
+                "title": "RECAPPING",
+                "page": 281
+            },
+            {
+                "title": "REFERENCES",
+                "page": 282
+            },
+            {
+                "title": "PROBLEMS",
+                "page": 282
+            }
+        ]
+    },
+
+    {
+        "title": "SYNCHRONOUS MACHINES",
+        "page" : 287,
+        "chapters": [
+            {
+                "title": "INTRODUCTION",
+                "page": 287
+            },
+            {
+                "title": "TWO-PHASE SYNCHRONOUS MACHINE",
+                "page": 288
+            },
+            {
+                "title": "VOLTAGE EQUATIONS AND WINDING INDUCTANCES",
+                "page": 294
+            },
+            {
+                "title": "TORQUE",
+                "page": 301
+            },
+            {
+                "title": "MACHINE EQUATIONS IN THE ROTOR REFERENCE FRAME",
+                "page": 302
+            },
+            {
+                "title": "ROTOR ANGLE",
+                "page": 309
+            },
+            {
+                "title": "ANALYSIS OF STEADY-STATE OPERATION",
+                "page": 310
+            },
+            {
+                "title": "DYNAMIC AND STEADY-STATE PERFORMANCE",
+                "page": 326
+            },
+            {
+                "title": "THREE-PHASE SYNCHRONOUS MACHINE",
+                "page": 335
+            },
+            {
+                "title": "RECAPPING",
+                "page": 340
+            },
+            {
+                "title": "REFERENCES",
+                "page": 341
+            },
+            {
+                "title": "PROBLEMS",
+                "page": 341
+            }
+        ]
+    },
+
+    {
+        "title": "PERMANENT-MAGNET ac MACHINE",
+        "page" : 345,
+        "chapters": [
+            {
+                "title": "INTRODUCTION",
+                "page": 345
+            },
+            {
+                "title": "TWO-PHASE PERMANENT-MAGNET ac MACHINE",
+                "page": 346
+            },
+            {
+                "title": "VOLTAGE EQUATIONS AND WINDING INDUCTANCES OF A PERMANENT-MAGNETIC ac MACHINE",
+                "page": 351
+            },
+            {
+                "title": "TORQUE",
+                "page": 354
+            },
+            {
+                "title": "MACHINE EQUATIONS OF A PERMANENT-MAGNETIC ac MACHINE IN THE ROTOR REFERENCE FRAME",
+                "page": 355
+            },
+            {
+                "title": "TWO-PHASE BRUSHLESS dc MACHINE",
+                "page": 357
+            },
+            {
+                "title": "DYNAMIC PERFORMANCE OF A BRUSHLESS dc MACHINE",
+                "page": 362
+            },
+            {
+                "title": "PHASE SHIFTING OF STATOR VOLTAGES OF PERMANENT- MAGNET ac MACHINE",
+                "page": 366
+            },
+            {
+                "title": "INTRODUCTION TO CONSTANT-TORQUE AND CONSTANT-POWER OPERATION",
+                "page": 375
+            },
+            {
+                "title": "TIME-DOMAIN BLOCK DIAGRAMS AND STATE EQUATIONS",
+                "page": 384
+            },
+            {
+                "title": "DIRECT AND QUADRATURE AXIS INDUCTANCES",
+                "page": 390
+            },
+            {
+                "title": "THREE-PHASE PERMANENT-MAGNET ac MACHINE",
+                "page": 392
+            },
+            {
+                "title": "THREE-PHASE BRUSHLESS dc MACHINE",
+                "page": 401
+            },
+            {
+                "title": "RECAPPING",
+                "page": 410
+            },
+            {
+                "title": "REFERENCES",
+                "page": 411
+            },
+            {
+                "title": "PROBLEMS",
+                "page": 411
+            }
+        ]
+    },
+
+    {
+        "title": "STEPPER MOTORS",
+        "page" : 415,
+        "chapters": [
+            {
+                "title": "INTRODUCTION",
+                "page": 415
+            },
+            {
+                "title": "BASIC CONFIGURATIONS OF MULTISTACK VARIABLE-RELUCTANCE STEPPER MOTORS",
+                "page": 415
+            },
+            {
+                "title": "EQUATIONS FOR MULTISTACK VARIABLE-RELUCTANCE STEPPER MOTORS",
+                "page": 422
+            },
+            {
+                "title": "OPERATING CHARACTERISTICS OF MULTISTACK VARIABLE-RELUCTANCE STEPPER MOTORS",
+                "page": 426
+            },
+            {
+                "title": "SINGLE-STACK VARIABLE-RELUCTANCE STEPPER MOTORS",
+                "page": 430
+            },
+            {
+                "title": "BASIC CONFIGURATION OF PERMANENT-MAGNET STEPPER MOTORS",
+                "page": 435
+            },
+            {
+                "title": "EQUATIONS FOR PERMANENT-MAGNET STEPPER MOTORS",
+                "page": 439
+            },
+            {
+                "title": "EQUATIONS OF PERMANENT-MANGET STEPPER MOTORS IN ROTOR REFERENCE FRAME — RELUCTANCE TORQUES NEGLECTED ",
+                "page": 443
+            },
+            {
+                "title": "RECAPPING",
+                "page": 448
+            },
+            {
+                "title": "REFERENCES",
+                "page": 449
+            },
+            {
+                "title": "PROBLEMS",
+                "page": 449
+            }
+        ]
+    },
+
+    {
+        "title": "UNBALANCED OPERATION AND SINGLE-PHASE INDUCTION MOTORS",
+        "page" : 451,
+        "chapters": [
+            {
+                "title": "INTRODUCTION",
+                "page": 451
+            },
+            {
+                "title": "SYMMETRICAL COMPONENTS",
+                "page": 452
+            },
+            {
+                "title": "ANALYSIS OF UNBALANCED MODES OF OPERATION",
+                "page": 456
+            },
+            {
+                "title": "SINGLE-PHASE INDUCTION MOTORS",
+                "page": 465
+            },
+            {
+                "title": "CAPACITOR-START INDUCTION MOTOR",
+                "page": 467
+            },
+            {
+                "title": "DYNAMIC AND STEADY-STATE PERFORMANCE OF A CAPACITOR-START SINGLE-PHASE INDUCTION MOTOR",
+                "page": 470
+            },
+            {
+                "title": "SPLIT-PHASE INDUCTION MOTOR",
+                "page": 474
+            },
+            {
+                "title": "RECAPPING",
+                "page": 474
+            },
+            {
+                "title": "REFERENCES",
+                "page": 475
+            },
+            {
+                "title": "PROBLEMS",
+                "page": 475
+            }
+        ]
+    },
+
+    {
+        "title": "APPENDIX A ABBREVIATIONS, CONSTANTS CONVERSIONS, AND IDENTITIES",
+        "page": 477,
+        "no_number": true
+    },
+
+    {
+        "title": "APPENDIX B MATRIX ALGEBRA",
+        "page": 481,
+        "no_number": true
+    },
+
+    {
+        "title": "APPENDIX C THREE-PHASE SYSTEMS",
+        "page": 489,
+        "no_number": true
+    },
+
+    {
+        "title": "INDEX",
+        "page": 493,
+        "no_number": true
+    }
+]
