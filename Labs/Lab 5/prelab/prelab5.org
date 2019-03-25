@@ -1,0 +1,244 @@
+#+TITLE: Pre-Lab 5: Squirrel-Cage Induction Motor
+#+AUTHOR: Jasper Chan - 37467164
+#+OPTIONS: toc:nil
+
+#+LATEX_HEADER: \setlength{\parindent}{0pt}
+#+LATEX_HEADER: \pagenumbering{roman}
+#+LATEX_HEADER: \usepackage{float}
+#+LATEX_HEADER: \usepackage{steinmetz}
+#+LATEX_HEADER: \usepackage{siunitx}
+#+LATEX_HEADER: \usepackage{enumitem}
+
+#+BEGIN_SRC ipython :results silent :exports none
+%matplotlib inline
+%config InlineBackend.figure_format = 'svg'
+from matplotlib import pyplot as plt
+import matplotlib
+import numpy as np
+from tabulate import tabulate
+import SchemDraw as schem
+import SchemDraw.elements as e
+plt.rcParams['svg.fonttype'] = 'path'
+#+END_SRC
+* Plot of Torque Equations
+Consider a Y-connected \SI{7.5}{\kilo\watt}, \SI{220}{\volt} (line-line), \SI{60}{\hertz}, 6-pole squirrel-cage motor with the following parameters:
+\begin{align*}
+R_1 &= \SI{0.294}{\ohm} & X_1 &= \SI{0.503}{\ohm}\\
+R_2^\prime &= \SI{0.144}{\ohm} & X_2^\prime &= \SI{0.209}{\ohm} \\
+& &  X_m &= \SI{13.5}{\ohm}
+\end{align*}
+#+BEGIN_SRC ipython :results raw drawer :exports none
+# 999 so that theres no divide by 0 error
+slip = np.linspace(2.0, -1.0, 999) 
+
+P = 6
+V_s = 220 / np.sqrt(3) # volt
+omega_e = 60 * 2 * np.pi # rad/s
+
+# Ohms
+R_1 = 0.294
+R_2 = 0.144
+X_1 = 0.503
+X_2 = 0.209
+X_m = 13.5
+
+#+END_SRC 
+
+#+RESULTS:
+:RESULTS:
+# Out[101]:
+:END:
+
+\begin{enumerate}[label=(\alph*)]
+\item Plot the real torque equation defined by:
+\begin{equation*}
+T_e =
+3 \frac{P}{2} \cdot
+\frac
+{(X_{ms}^2 / \omega_e) r_r^\prime s}
+{[r_s r_r^\prime + s(X_{ms}^2 - X_{ss} X_{rr}^\prime )]^2 +
+(r_r^\prime X_{ss} + sr_s X_{rr}^\prime)^2}
+| V_s |^2
+\end{equation*}
+\item Plot the approximate torque equation defined by:
+\begin{equation*}
+T_e =
+3 \frac{P}{2} \cdot
+\frac{| V_s |^2}{\omega_e} \cdot
+\frac
+{(r_r^\prime / s)}
+{(r_s + r_r^\prime / s)^2 + (X_{ls} + X_{lr}^\prime)^2}
+\end{equation*}
+\end{enumerate}
+** True Torque Plot
+Using the true equivalent circuit:
+#+BEGIN_SRC ipython :results silent :exports none
+d = schem.Drawing(unit=2)
+
+vs1 = d.add(e.DOT_OPEN)
+i1 = d.add(e.LINE, d='right')
+d.labelI(i1, '$I_{as}$', arrowlen=d.unit*0.5)
+d.add(e.RES, label='$R_1$')
+d.add(e.INDUCTOR, label='$jX_1$')
+dot1 = d.add(e.DOT)
+d.add(e.LINE, d='right', l=d.unit*0.25)
+d.add(e.INDUCTOR, label='$jX_2^\prime$')
+iar = d.add(e.LINE, d='right', l=d.unit*0.25)
+d.labelI(iar, '$I_{ar}^\prime$', arrowlen=-d.unit*0.5)
+d.add(e.LINE, d='down', l=d.unit*0.25)
+d.add(e.RES, d='down', label=r'$\frac{R_2^\prime}{s}$')
+d.add(e.LINE, d='down', l=d.unit*0.25)
+d.add(e.LINE, d='left', tox=dot1.start)
+d.add(e.DOT)
+d.push()
+d.add(e.INDUCTOR, d='up',to=dot1.start, label='$jX_m$')
+d.pop()
+d.add(e.LINE, d='left', tox=vs1.start)
+d.add(e.DOT_OPEN)
+
+d.draw()
+d.save('true_circuit.svg')
+
+#+END_SRC
+
+#+CAPTION: True equivalent circuit diagram for Y-connected motor
+#+ATTR_LATEX: :width 0.6\textwidth :placement [H]
+[[./true_circuit.svg]]
+
+#+BEGIN_SRC ipython :results none :exports none
+def T_true(P, V_s, omega_e, r_s, r_r, X_ls, X_lr, X_ms, s):
+    X_ss = X_ls + X_ms
+    X_rr = X_lr + X_ms
+    T = 3*(P/2) * ((X_ms**2/omega_e)*r_r*s) / ((r_s*r_r + s*(X_ms**2 - X_ss*X_rr))**2 + (r_r*X_ss + s*r_s*X_rr)**2) * np.abs(V_s)**2
+
+    return T
+
+torque_true = T_true(P, V_s, omega_e, R_1, R_2, X_1, X_2, X_m, slip)
+
+fig = plt.figure()
+ax1 = fig.add_subplot(111)
+ax2 = ax1.twiny()
+ax1.plot(slip, torque_true)
+
+ax1.set_xlim(max(slip)+0.1, min(slip)-0.1)
+ax2.set_xlim(min(slip)-0.1, max(slip)+0.1)
+ax1.set_xlabel('slip')
+ax2.set_xlabel('$\omega_r / \omega_e$')
+ax1.set_ylabel(r'$T_e$ [Nm]')
+
+plt.savefig('true.svg')
+#+END_SRC 
+
+#+CAPTION: True Torque vs. Slip graph
+#+ATTR_LATEX: :placement [H]
+[[./true.svg]]
+** Approximate Torque Plot
+Using the approximate equivalent circuit:
+#+BEGIN_SRC ipython :results silent :exports none
+d = schem.Drawing(unit=2)
+
+d.add(e.DOT_OPEN)
+i1 = d.add(e.LINE, d='right')
+d.labelI(i1, '$I_1$', arrowlen=d.unit*0.5)
+dot1 = d.add(e.DOT)
+d.add(e.RES, label='$R_1$')
+d.add(e.INDUCTOR, label='$jX_1$')
+i2 = d.add(e.LINE, l=0)
+d.labelI(i2, '$I_2^\prime$', arrowlen=d.unit*0.5, top=False)
+d.add(e.INDUCTOR, label='$jX_2^\prime$')
+d.add(e.LINE, d='down', l=d.unit*0.25)
+d.add(e.RES, d='down', label=r'$\frac{R_2^\prime}{s}$')
+d.add(e.LINE, d='down', l=d.unit*0.25)
+d.add(e.LINE, d='left')
+pag = d.add(e.LINE, d='left', l=0)
+d.labelI(pag, '$P_{ag}$', arrowlen=-d.unit*0.5, top=True, arrowofst=-d.unit*0.2)
+d.add(e.LINE, d='left', tox=dot1.start)
+d.add(e.DOT)
+d.push()
+d.add(e.INDUCTOR, d='up',to=dot1.start, label='$jX_m$')
+d.pop()
+d.add(e.LINE, d='left')
+d.add(e.DOT_OPEN)
+
+d.draw()
+d.save('approx_circuit.svg')
+
+#+END_SRC
+
+#+CAPTION: Approximate equivalent circuit diagram for Y-connected motor
+#+ATTR_LATEX: :width 0.5\textwidth :placement [H]
+[[./approx_circuit.svg]]
+
+#+BEGIN_SRC ipython :results none :exports none
+def T_approx(P, V_s, omega_e, r_s, r_r, X_ls, X_lr, s):
+    T = 3*(P/2) * (np.abs(V_s**2)/omega_e) * (r_r/s)/((r_s + r_r/s)**2 + (X_ls + X_lr)**2)
+
+    return T
+
+torque_approx = T_approx(P, V_s, omega_e, R_1, R_2, X_1, X_2, slip)
+
+fig = plt.figure()
+ax1 = fig.add_subplot(111)
+ax2 = ax1.twiny()
+ax1.plot(slip, torque_approx)
+
+ax1.set_xlim(max(slip)+0.1, min(slip)-0.1)
+ax2.set_xlim(min(slip)-0.1, max(slip)+0.1)
+ax1.set_xlabel('slip')
+ax2.set_xlabel('$\omega_r / \omega_e$')
+ax1.set_ylabel(r'$T_e$ [Nm]')
+
+plt.savefig('approx.svg')
+#+END_SRC 
+
+#+CAPTION: Approximate Torque vs. Slip graph
+#+ATTR_LATEX: :placement [H]
+[[./approx.svg]]
+
+** Comparison between Approximation and True formula
+#+BEGIN_SRC ipython :results none :exports none
+
+rel_error = np.divide((torque_approx - torque_true), torque_true)
+
+fig = plt.figure(figsize=(8,6))
+ax1 = fig.add_subplot(111)
+
+box = ax1.get_position()
+
+ax2 = ax1.twinx()
+ax3 = ax2.twiny()
+p_true, = ax1.plot(slip, torque_true, label='true')
+p_approx, = ax1.plot(slip, torque_approx, label='approx')
+p_err, = ax3.plot(np.flip(slip), rel_error, label='relerror', c='g')
+
+ax1.set_xlim(max(slip)+0.1, min(slip)-0.1)
+ax3.set_xlim(min(slip)-0.1, max(slip)+0.1)
+ax3.set_ylim(0.02, 0.1)
+ax1.set_xlabel('slip')
+ax3.set_xlabel('$\omega_r / \omega_e$')
+ax1.set_ylabel(r'$T_e$ [Nm]')
+ax2.set_ylabel('Relative Error [%]')
+
+lgd = plt.legend([p_true, p_approx, p_err], ['true', 'approx', 'relative error'], ncol=1, loc='center right', bbox_to_anchor=(1.5,0.5))
+plt.savefig('comparison.svg', bbox_extra_artists=(lgd,), bbox_inches='tight')
+
+#+END_SRC 
+
+:END:
+
+#+CAPTION: Comparison of true and approximate torque curves label:comp
+#+ATTR_LATEX: :placement [H]
+[[./comparison.svg]]
+
+#+BEGIN_SRC ipython :results raw drawer :exports both
+f'{max(rel_error):.4f}'
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+# Out[197]:
+: '0.0947'
+:END:
+
+From Figure ref:comp, we can see that for large slip magnitudes ($> 0.5$) the error is very low, and never exceeds \SI{10}{\percent} even for low slip ratios.
+
